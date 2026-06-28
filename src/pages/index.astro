@@ -31,9 +31,19 @@ import Docs from '../layouts/Docs.astro';
 
   <div class="card">
     <div class="demo-row" data-test="badges">
-      <Badge client:load variant="primary">New</Badge>
-      <Badge client:load variant="success">Stable</Badge>
-      <Badge client:load variant="danger">Deprecated</Badge>
+      {/*
+        Honest caveat: the published @acoyfellow/kumo-svelte Badge currently does
+        NOT map its `variant` prop to a color class — the compiled component only
+        emits two branches (default + the "Healthy" success dot), so every label
+        falls through to the same inverted (black) pill regardless of `variant`.
+        That variant->class mapping is a component/compiler follow-up. Until then
+        the demo differentiates using Kumo's OWN badge color tokens via inline
+        style (which the component forwards onto the pill via {...rest}), so the
+        colors are still genuine Kumo palette values, not hand-invented hex.
+      */}
+      <Badge client:load variant="primary" style="background-color:var(--color-kumo-badge-blue);color:#fff">New</Badge>
+      <Badge client:load variant="success" style="background-color:var(--color-kumo-badge-teal);color:#fff">Stable</Badge>
+      <Badge client:load variant="danger" style="background-color:var(--color-kumo-badge-red);color:#fff">Deprecated</Badge>
     </div>
   </div>
 
