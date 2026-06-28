@@ -1,0 +1,64 @@
+---
+// Vue path. Kumo also publishes precompiled Vue components (@acoyfellow/kumo-vue).
+// They work in Astro too — with one caveat called out below.
+import { Button, Badge, Field, Input } from '@acoyfellow/kumo-vue';
+import '@acoyfellow/kumo-vue/tokens.css';
+import '@acoyfellow/kumo-vue/styles.css';
+import Docs from '../layouts/Docs.astro';
+---
+
+<Docs title="Kumo + Astro — Vue notes" active="vue">
+  <p class="eyebrow">Alternate framework</p>
+  <h1 class="title">Kumo in Astro, the Vue way.</h1>
+  <p class="lede">
+    If your stack is Vue instead of Svelte, Kumo has you covered with
+    <code>@acoyfellow/kumo-vue</code>. The components render and hydrate fine — with one
+    honest directive caveat called out below.
+  </p>
+
+  <div class="note">
+    <strong>Caveat (real, verified):</strong> in this version the Vue components are not
+    SSR-safe under Astro. Rendering them with <code>client:load</code> (which server-renders
+    first) throws <em>"Unable to render Button"</em> during <code>astro build</code>. The fix
+    is to render them client-only with <code>client:only="vue"</code> — they then work
+    perfectly, entirely on the client. The <a href="/">Svelte path</a> has <strong>no</strong>
+    such caveat (full SSR + hydrate), which is why it's the recommended default for docs.
+  </div>
+
+  <div class="card">
+    <div class="demo-row">
+      <Button client:only="vue" variant="primary">Get started</Button>
+      <Button client:only="vue" variant="secondary">View source</Button>
+      <Button client:only="vue" variant="destructive">Delete</Button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem;">
+    <div class="demo-row">
+      <Badge client:only="vue" variant="primary">New</Badge>
+      <Badge client:only="vue" variant="success">Stable</Badge>
+      <Badge client:only="vue" variant="danger">Deprecated</Badge>
+    </div>
+  </div>
+
+  <h2 class="section">Form inputs</h2>
+  <p class="section-sub">Same components, same <code>client:only="vue"</code> directive.</p>
+
+  <div class="card">
+    <div class="demo-stack">
+      <Field
+        client:only="vue"
+        id="email"
+        label="Work email"
+        description="We'll only use this for release notes."
+        required
+      />
+      <Input client:only="vue" placeholder="Search the docs…" />
+    </div>
+  </div>
+
+  <pre><code>{`// On the Vue path, render Kumo components client-only to avoid the SSR error:
+<Button client:only="vue" variant="primary">Get started</Button>
+<Field  client:only="vue" id="email" label="Work email" required />
+<Input  client:only="vue" placeholder="Search the docs…" />`}</code></pre>
+</Docs>

@@ -1,0 +1,77 @@
+---
+// This page IS your Astro docs site — now rendering real Kumo components.
+// No React. No design tokens copied by hand. Just the published package.
+import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
+import Docs from '../layouts/Docs.astro';
+---
+
+<Docs title="Kumo + Astro — native components in your docs" active="svelte">
+  <p class="eyebrow">Proof of concept</p>
+  <h1 class="title">Your Astro docs, using real Kumo components.</h1>
+  <p class="lede">
+    Every interactive control below is the actual <code>@acoyfellow/kumo-svelte</code>
+    component, rendered by Astro and hydrated in the browser — not a React port and
+    not a hand-approximated copy of Kumo's tokens. The styling you see is Kumo's own.
+  </p>
+
+  <div class="card">
+    <div class="demo-row" data-test="buttons">
+      <Button client:load variant="primary">Get started</Button>
+      <Button client:load variant="secondary">View source</Button>
+      <Button client:load variant="destructive">Delete</Button>
+    </div>
+  </div>
+
+  <h2 class="section">Why this matters</h2>
+  <p class="section-sub">
+    The old path forced docs authors to re-approximate Kumo's look by hand because
+    Kumo only shipped React. This repo shows the clean path: consume Kumo's published
+    framework components <em>directly</em> from a plain Astro site.
+  </p>
+
+  <div class="card">
+    <div class="demo-row" data-test="badges">
+      <Badge client:load variant="primary">New</Badge>
+      <Badge client:load variant="success">Stable</Badge>
+      <Badge client:load variant="danger">Deprecated</Badge>
+    </div>
+  </div>
+
+  <h2 class="section">Install &amp; use — the whole recipe</h2>
+  <p class="section-sub">Five lines. This is the entire integration.</p>
+  <pre><code>{`npm i @acoyfellow/kumo-svelte
+// astro.config.mjs -> integrations: [svelte()]
+
+import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
+import '@acoyfellow/kumo-svelte/styles.css';
+// then: <Button client:load variant="primary">Get started</Button>`}</code></pre>
+
+  <h2 class="section">Forms work too</h2>
+  <p class="section-sub">
+    Kumo's <code>Field</code> and <code>Input</code> render server-side and hydrate cleanly
+    via <code>client:load</code>. No special handling needed on the Svelte path.
+  </p>
+
+  <div class="card">
+    <div class="demo-stack">
+      <Field
+        client:load
+        id="email"
+        label="Work email"
+        description="We'll only use this for release notes."
+        required
+      />
+      <Input client:load placeholder="Search the docs…" />
+      <div>
+        <Button client:load variant="primary">Subscribe</Button>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Honest note:</strong> the surrounding page chrome (sidebar, header) is plain
+    HTML/CSS so the proof is unambiguous — anything that looks like a UI control here is a
+    genuine Kumo component. Prefer Svelte for docs: it server-renders and hydrates with
+    zero workarounds. See the <a href="/vue">Vue notes</a> for the one caveat there.
+  </div>
+</Docs>

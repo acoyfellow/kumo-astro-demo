@@ -1,0 +1,136 @@
+---
+// Docs shell. The chrome (sidebar, header) is plain Astro/HTML so the demo
+// stays honest: everything inside the <main> content that looks like a real UI
+// control is a *real* Kumo component, not a hand-styled lookalike.
+import '@acoyfellow/kumo-svelte/tokens.css';
+import '@acoyfellow/kumo-svelte/styles.css';
+
+interface Props {
+  title: string;
+  active?: 'svelte' | 'vue';
+}
+const { title, active = 'svelte' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Proof: an Astro docs site consuming Kumo components directly — no React, no hand-approximated tokens."
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">☁</span>
+          <span class="brand-name">Kumo&nbsp;Docs</span>
+        </div>
+        <nav>
+          <p class="nav-group">Getting started</p>
+          <a class="nav-link" href="/" aria-current={active === 'svelte' ? 'page' : undefined}>Overview (Svelte)</a>
+          <a class="nav-link" href="/vue" aria-current={active === 'vue' ? 'page' : undefined}>Vue notes</a>
+          <p class="nav-group">Reference</p>
+          <a class="nav-link" href="https://github.com/acoyfellow/kumo-astro-demo">Source on GitHub</a>
+        </nav>
+      </aside>
+
+      <div class="content">
+        <header class="topbar">
+          <span class="crumbs">Docs / <strong>Overview</strong></span>
+          <a class="topbar-link" href="https://github.com/acoyfellow/kumo-astro-demo">GitHub →</a>
+        </header>
+        <main class="main">
+          <slot />
+        </main>
+        <footer class="footer">
+          Built with Astro + Kumo. Components rendered directly from the published
+          <code>@acoyfellow/kumo-svelte</code> package — no React in the loop.
+        </footer>
+      </div>
+    </div>
+
+    <style is:global>
+      :root {
+        --doc-bg: #fbfbfc;
+        --doc-panel: #ffffff;
+        --doc-line: #e6e6ea;
+        --doc-text: #1d1d20;
+        --doc-muted: #6b6b73;
+        --doc-accent: #f6821f; /* cloudflare orange */
+        --doc-radius: 12px;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: var(--doc-text);
+        background: var(--doc-bg);
+        line-height: 1.55;
+      }
+      .shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; }
+      .sidebar {
+        border-right: 1px solid var(--doc-line);
+        background: var(--doc-panel);
+        padding: 1.25rem 1rem;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
+      .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.05rem; margin-bottom: 1.5rem; }
+      .brand-mark { color: var(--doc-accent); font-size: 1.2rem; }
+      .nav-group { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--doc-muted); margin: 1.25rem 0 .4rem; }
+      .nav-link { display: block; padding: .35rem .5rem; border-radius: 8px; color: var(--doc-text); text-decoration: none; font-size: .9rem; }
+      .nav-link:hover { background: #f1f1f4; }
+      .nav-link[aria-current="page"] { background: #fff3e8; color: #b45309; font-weight: 600; }
+      .content { display: flex; flex-direction: column; min-width: 0; }
+      .topbar {
+        display: flex; align-items: center; justify-content: space-between;
+        border-bottom: 1px solid var(--doc-line);
+        padding: .85rem 2rem; background: var(--doc-panel);
+        position: sticky; top: 0; z-index: 5;
+      }
+      .crumbs { color: var(--doc-muted); font-size: .85rem; }
+      .crumbs strong { color: var(--doc-text); }
+      .topbar-link { color: var(--doc-accent); text-decoration: none; font-size: .85rem; font-weight: 600; }
+      .main { padding: 2.5rem 2rem 4rem; max-width: 860px; width: 100%; margin: 0 auto; }
+      .footer { border-top: 1px solid var(--doc-line); padding: 1.25rem 2rem; color: var(--doc-muted); font-size: .82rem; }
+      .footer code { background: #f1f1f4; padding: .1rem .35rem; border-radius: 5px; }
+
+      /* doc content primitives */
+      .eyebrow { color: var(--doc-accent); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: .75rem; }
+      h1.title { font-size: 2.1rem; margin: .35rem 0 .5rem; letter-spacing: -.02em; }
+      .lede { font-size: 1.1rem; color: var(--doc-muted); margin: 0 0 2rem; }
+      h2.section { font-size: 1.25rem; margin: 2.5rem 0 .25rem; letter-spacing: -.01em; }
+      .section-sub { color: var(--doc-muted); margin: 0 0 1rem; font-size: .92rem; }
+      .card {
+        border: 1px solid var(--doc-line);
+        background: var(--doc-panel);
+        border-radius: var(--doc-radius);
+        padding: 1.5rem;
+      }
+      .demo-row { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+      .demo-stack { display: flex; flex-direction: column; gap: 1rem; max-width: 420px; }
+      pre {
+        background: #15151a; color: #e7e7ea; border-radius: 10px;
+        padding: 1rem 1.1rem; overflow-x: auto; font-size: .85rem; line-height: 1.5;
+        margin: 1rem 0;
+      }
+      pre code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .note {
+        border-left: 3px solid var(--doc-accent);
+        background: #fff8f1; padding: .85rem 1rem; border-radius: 0 8px 8px 0;
+        font-size: .9rem; margin: 1.25rem 0;
+      }
+      @media (max-width: 760px) {
+        .shell { grid-template-columns: 1fr; }
+        .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--doc-line); }
+      }
+    </style>
+  </body>
+</html>

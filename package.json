@@ -1,0 +1,27 @@
+{
+  "name": "kumo-astro-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Astro consuming Kumo design-system components directly — no React, no hand-approximated tokens.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@acoyfellow/kumo-svelte": "0.0.1",
+    "@acoyfellow/kumo-vue": "0.0.1"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "7.2.5",
+    "@astrojs/vue": "5.1.4",
+    "astro": "5.18.2",
+    "svelte": "5.56.4",
+    "typescript": "5.9.3",
+    "vue": "3.5.39",
+    "wrangler": "^4.0.0"
+  }
+}

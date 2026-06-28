@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kumo-astro-demo",
+  "compatibility_date": "2025-01-01",
+  // Astro builds a fully static site into ./dist; Cloudflare serves it as
+  // Workers static assets (no server runtime needed for this demo).
+  "assets": {
+    "directory": "./dist"
+  }
+}
