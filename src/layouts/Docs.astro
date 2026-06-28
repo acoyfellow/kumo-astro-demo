@@ -127,6 +127,8 @@ const { title, active = 'svelte' } = Astro.props;
         background: #fff8f1; padding: .85rem 1rem; border-radius: 0 8px 8px 0;
         font-size: .9rem; margin: 1.25rem 0;
       }
+      .caption { color: var(--doc-muted); font-size: .82rem; margin: .75rem 0 0; }
+      .caption code { background: #f1f1f4; padding: .08rem .3rem; border-radius: 5px; }
       @media (max-width: 760px) {
         .shell { grid-template-columns: 1fr; }
         .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--doc-line); }
