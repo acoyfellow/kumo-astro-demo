@@ -28,8 +28,7 @@ const { title, active = 'svelte' } = Astro.props;
     <div class="shell">
       <aside class="sidebar">
         <div class="brand">
-          <span class="brand-mark" aria-hidden="true">◆</span>
-          <span class="brand-name">Kumo&nbsp;Docs</span>
+          <span class="brand-name"><span class="brand-accent">Kumo</span>&nbsp;Docs</span>
         </div>
         <nav>
           <p class="nav-group">Getting started</p>
@@ -82,8 +81,9 @@ const { title, active = 'svelte' } = Astro.props;
         top: 0;
         height: 100vh;
       }
-      .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.05rem; margin-bottom: 1.5rem; }
-      .brand-mark { color: var(--doc-accent); font-size: 1.2rem; }
+      .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.1rem; margin-bottom: 1.5rem; letter-spacing: -.01em; }
+      .brand-name { color: var(--doc-text); }
+      .brand-accent { color: var(--doc-accent); }
       .nav-group { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--doc-muted); margin: 1.25rem 0 .4rem; }
       .nav-link { display: block; padding: .35rem .5rem; border-radius: 8px; color: var(--doc-text); text-decoration: none; font-size: .9rem; }
       .nav-link:hover { background: #f1f1f4; }
