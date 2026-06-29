@@ -28,7 +28,7 @@ const { title, active = 'svelte' } = Astro.props;
     <div class="shell">
       <aside class="sidebar">
         <div class="brand">
-          <span class="brand-mark">☁</span>
+          <span class="brand-mark" aria-hidden="true">◆</span>
           <span class="brand-name">Kumo&nbsp;Docs</span>
         </div>
         <nav>
@@ -62,7 +62,7 @@ const { title, active = 'svelte' } = Astro.props;
         --doc-line: #e6e6ea;
         --doc-text: #1d1d20;
         --doc-muted: #6b6b73;
-        --doc-accent: #f6821f; /* cloudflare orange */
+        --doc-accent: #6366f1; /* indigo */
         --doc-radius: 12px;
       }
       * { box-sizing: border-box; }
@@ -87,7 +87,7 @@ const { title, active = 'svelte' } = Astro.props;
       .nav-group { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--doc-muted); margin: 1.25rem 0 .4rem; }
       .nav-link { display: block; padding: .35rem .5rem; border-radius: 8px; color: var(--doc-text); text-decoration: none; font-size: .9rem; }
       .nav-link:hover { background: #f1f1f4; }
-      .nav-link[aria-current="page"] { background: #fff3e8; color: #b45309; font-weight: 600; }
+      .nav-link[aria-current="page"] { background: #eef2ff; color: #4338ca; font-weight: 600; }
       .content { display: flex; flex-direction: column; min-width: 0; }
       .topbar {
         display: flex; align-items: center; justify-content: space-between;
@@ -124,7 +124,7 @@ const { title, active = 'svelte' } = Astro.props;
       pre code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
       .note {
         border-left: 3px solid var(--doc-accent);
-        background: #fff8f1; padding: .85rem 1rem; border-radius: 0 8px 8px 0;
+        background: #eef2ff; padding: .85rem 1rem; border-radius: 0 8px 8px 0;
         font-size: .9rem; margin: 1.25rem 0;
       }
       .caption { color: var(--doc-muted); font-size: .82rem; margin: .75rem 0 0; }
