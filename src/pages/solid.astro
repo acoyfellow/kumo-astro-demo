@@ -1,0 +1,63 @@
+---
+// Solid path. Kumo also publishes precompiled Solid components (@acoyfellow/kumo-solid).
+// They render and hydrate cleanly in Astro, in full per-variant color.
+import { Button, Badge, Field, Input } from '@acoyfellow/kumo-solid';
+import '@acoyfellow/kumo-solid/tokens.css';
+import '@acoyfellow/kumo-solid/styles.css';
+import Docs from '../layouts/Docs.astro';
+---
+
+<Docs title="Kumo + Astro — Solid notes" active="solid">
+  <p class="eyebrow">Alternate framework</p>
+  <h1 class="title">Kumo in Astro, the Solid way.</h1>
+  <p class="lede">
+    If your stack is SolidJS, Kumo has you covered with
+    <code>@acoyfellow/kumo-solid</code>. The components server-render and hydrate
+    with normal <code>client:load</code> — same clean path as Svelte and Vue, in
+    full per-variant color.
+  </p>
+
+  <h2 class="section">Buttons &amp; badges — real per-variant colors</h2>
+  <p class="section-sub">
+    Same <code>variant</code> props, same real Kumo color classes as the Svelte and Vue pages.
+  </p>
+
+  <div class="card">
+    <div class="demo-row">
+      <Button client:load variant="primary">Get started</Button>
+      <Button client:load variant="secondary">View source</Button>
+      <Button client:load variant="danger">Delete</Button>
+      <Button client:load variant="outline">Outline</Button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem;">
+    <div class="demo-row">
+      <Badge client:load variant="success">Stable</Badge>
+      <Badge client:load variant="error">Deprecated</Badge>
+      <Badge client:load variant="info">New</Badge>
+      <Badge client:load variant="purple">Experimental</Badge>
+    </div>
+  </div>
+
+  <h2 class="section">Form inputs</h2>
+  <p class="section-sub">Same components, same <code>client:load</code> directive.</p>
+
+  <div class="card">
+    <div class="demo-stack">
+      <Field
+        client:load
+        id="email"
+        label="Work email"
+        description="We'll only use this for release notes."
+        required
+      />
+      <Input client:load placeholder="Search the docs…" />
+    </div>
+  </div>
+
+  <pre><code>{`// On the Solid path, render Kumo components with the Solid client directive:
+<Button client:load variant="primary">Get started</Button>
+<Field  client:load id="email" label="Work email" required />
+<Input  client:load placeholder="Search the docs…" />`}</code></pre>
+</Docs>

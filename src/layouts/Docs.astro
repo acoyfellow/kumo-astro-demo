@@ -7,7 +7,7 @@ import '@acoyfellow/kumo-svelte/styles.css';
 
 interface Props {
   title: string;
-  active?: 'svelte' | 'vue';
+  active?: 'svelte' | 'vue' | 'solid';
 }
 const { title, active = 'svelte' } = Astro.props;
 ---
@@ -34,6 +34,7 @@ const { title, active = 'svelte' } = Astro.props;
           <p class="nav-group">Getting started</p>
           <a class="nav-link" href="/" aria-current={active === 'svelte' ? 'page' : undefined}>Overview (Svelte)</a>
           <a class="nav-link" href="/vue" aria-current={active === 'vue' ? 'page' : undefined}>Vue notes</a>
+          <a class="nav-link" href="/solid" aria-current={active === 'solid' ? 'page' : undefined}>Solid notes</a>
           <p class="nav-group">Reference</p>
           <a class="nav-link" href="https://github.com/acoyfellow/kumo-astro-demo">Source on GitHub</a>
         </nav>
