@@ -14,13 +14,13 @@ import Docs from '../layouts/Docs.astro';
     component, rendered by Astro and hydrated in the browser — not a React port and
     not a hand-approximated copy of Kumo's tokens. Nothing here is styled by hand:
     every class you inspect comes straight from the package. The styling you see is
-    Kumo's own — exactly what the package emits, no more, no less.
+    Kumo's own — exactly what the package emits, in full color.
   </p>
 
-  <h2 class="section">Real components, rendered as-is</h2>
+  <h2 class="section">Buttons — real per-variant colors</h2>
   <p class="section-sub">
-    These are genuine Kumo buttons, fields, and badges. Open devtools: the only
-    classes present are the ones the compiled package ships.
+    The <code>variant</code> prop maps to real Kumo color classes emitted by the
+    package. Open devtools: every class is genuine Kumo, no inline styles.
   </p>
 
   <div class="card">
@@ -28,34 +28,37 @@ import Docs from '../layouts/Docs.astro';
       <Button client:load variant="primary">Get started</Button>
       <Button client:load variant="secondary">View source</Button>
       <Button client:load variant="danger">Delete</Button>
+      <Button client:load variant="outline">Outline</Button>
+      <Button client:load variant="ghost">Ghost</Button>
     </div>
     <p class="caption">
-      Honest note: the published build emits a single shared button style for
-      arbitrary labels — the <code>variant</code> prop is the real API, but its
-      per-variant color classes are not emitted yet for free-text content. That's
-      a tracked emitter gap in the compiler, so we don't fake the colors here.
-      What renders is exactly the package's real button styling.
+      <code>primary</code> renders <code>bg-kumo-brand</code> (Cloudflare blue),
+      <code>danger</code> renders <code>bg-kumo-danger</code> (red),
+      <code>secondary</code> the neutral base control, plus <code>outline</code> and
+      <code>ghost</code> — all sourced straight from Kumo's own <code>buttonVariants</code>.
     </p>
   </div>
 
-  <h2 class="section">Badges</h2>
+  <h2 class="section">Badges — real per-variant colors</h2>
   <p class="section-sub">
-    The Kumo <code>Badge</code> component, rendered straight from the package.
+    The Kumo <code>Badge</code> component maps its <code>variant</code> prop to real
+    color classes — green, red, blue, amber, purple — straight from the package.
   </p>
 
   <div class="card">
     <div class="demo-row" data-test="badges">
-      <Badge client:load variant="primary">New</Badge>
       <Badge client:load variant="success">Stable</Badge>
-      <Badge client:load variant="danger">Deprecated</Badge>
+      <Badge client:load variant="error">Deprecated</Badge>
+      <Badge client:load variant="info">New</Badge>
+      <Badge client:load variant="warning">Beta</Badge>
+      <Badge client:load variant="purple">Experimental</Badge>
     </div>
     <p class="caption">
-      Honest note: these three render with the <em>same</em> real style on purpose.
-      The published Badge does not yet map its <code>variant</code> prop to a color
-      class — it only emits the default pill (plus a couple of fixture-specific
-      branches). Per-variant badge colors are an emitter gap being tracked upstream.
-      We refuse to fake them with inline styles, so they look identical — which is
-      the truth of the current package.
+      Each badge renders its own real color: <code>success</code> →
+      <code>bg-kumo-success-tint</code>, <code>error</code> →
+      <code>bg-kumo-danger-tint</code>, <code>info</code> →
+      <code>bg-kumo-info-tint</code>, and so on — exactly what the package emits,
+      no inline styles, no hand-copied tokens.
     </p>
   </div>
 
@@ -85,8 +88,8 @@ import Docs from '../layouts/Docs.astro';
   <p class="section-sub">
     The old path forced docs authors to re-approximate Kumo's look by hand because
     Kumo only shipped React. This repo shows the clean path: consume Kumo's published
-    framework components <em>directly</em> from a plain Astro site — and show them
-    truthfully, gaps and all, rather than papering over emitter holes with hand-styling.
+    framework components <em>directly</em> from a plain Astro site — full color, the
+    real package styling, with zero hand-styling.
   </p>
 
   <h2 class="section">Install &amp; use — the whole recipe</h2>
@@ -99,10 +102,10 @@ import '@acoyfellow/kumo-svelte/styles.css';
 // then: <Button client:load variant="primary">Get started</Button>`}</code></pre>
 
   <div class="note">
-    <strong>Honest note:</strong> the surrounding page chrome (sidebar, header) is plain
-    HTML/CSS so the proof is unambiguous — anything that looks like a UI control here is a
-    genuine Kumo component, with zero inline styling and zero hand-copied tokens. Where the
-    package can't yet express a variant (badge colors, per-label button colors), we say so
-    instead of faking it. See the <a href="/vue">Vue notes</a> for the one caveat there.
+    <strong>How to read this page:</strong> the surrounding chrome (sidebar, header) is
+    plain HTML/CSS so the proof is unambiguous — anything that looks like a UI control
+    here is a genuine Kumo component, with zero inline styling and zero hand-copied
+    tokens. Buttons and badges render their real per-variant colors straight from the
+    package. The <a href="/vue">Vue path</a> works the same way — clean SSR + hydrate.
   </div>
 </Docs>

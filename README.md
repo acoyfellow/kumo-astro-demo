@@ -54,24 +54,25 @@ These versions are pinned because they are the **known-good** combination:
 | `svelte`         | `5.56.4` | |
 | `@astrojs/vue`   | `5.1.4`  | for the optional Vue page |
 | `vue`            | `3.5.39` | |
-| `@acoyfellow/kumo-svelte` | `0.0.1` | real published package |
+| `@astrojs/solid-js`| `7.0.0` | for the optional Solid components |
+| `solid-js`       | `1.9.13` | |
+| `@acoyfellow/kumo-svelte` | `^0.0.2` | real published package |
+| `@acoyfellow/kumo-vue`    | `^0.0.2` | real published package |
+| `@acoyfellow/kumo-solid`  | `^0.0.2` | real published package |
 
 > ⚠️ **Do not jump `@astrojs/svelte` to v9.** v9 requires an Astro 7 alpha and will not work with the stable Astro 5 used here. Stick to the `@astrojs/svelte@7.x` line shown above.
 
 ## Vue path (optional `/vue` page)
 
-Vue works too via `@acoyfellow/kumo-vue` — with **one honest, verified caveat**:
-
-- In this version the Vue Kumo components are **not SSR-safe** under Astro. Rendering them with `client:load` (which server-renders first) throws *"Unable to render Button"* during `astro build`.
-- The fix is simple: render them **client-only** with `client:only="vue"`. They then work perfectly, entirely on the client.
+Vue works too via `@acoyfellow/kumo-vue` — the same clean path as Svelte. As of `0.0.2` the Vue components server-render and hydrate cleanly under Astro with normal `client:load` (the earlier SSR `ssrRender` issue is fixed), and render their real per-variant colors:
 
 ```astro
-<Button client:only="vue" variant="primary">Get started</Button>
-<Field  client:only="vue" id="email" label="Work email" required />
-<Input  client:only="vue" placeholder="Search…" />
+<Button client:load variant="primary">Get started</Button>
+<Field  client:load id="email" label="Work email" required />
+<Input  client:load placeholder="Search…" />
 ```
 
-The **Svelte path has no such caveat** (full SSR + hydrate), which is why it's the recommended default — especially for docs.
+Svelte, Vue, and Solid (`@acoyfellow/kumo-solid`) all work the same way — full SSR + hydrate, full per-variant color, no special handling on any path.
 
 ## What's in here
 
@@ -80,8 +81,8 @@ src/
   layouts/Docs.astro   # plain-HTML docs chrome (sidebar/header) — deliberately NOT Kumo,
                        #   so every Kumo component on the page is unambiguous
   pages/index.astro    # primary: Svelte Kumo showcase (buttons, badges, field, input)
-  pages/vue.astro      # optional: Vue path + the client:only caveat handled
-astro.config.mjs       # svelte() + vue() integrations
+  pages/vue.astro      # optional: Vue path — clean client:load SSR + hydrate
+astro.config.mjs       # svelte() + vue() + solid() integrations
 wrangler.jsonc         # Cloudflare static-assets deploy config
 ```
 
