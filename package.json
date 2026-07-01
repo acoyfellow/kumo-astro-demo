@@ -12,9 +12,9 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "@acoyfellow/kumo-solid": "^0.0.3",
-    "@acoyfellow/kumo-svelte": "^0.0.3",
-    "@acoyfellow/kumo-vue": "^0.0.3",
+    "@acoyfellow/kumo-solid": "^0.0.4",
+    "@acoyfellow/kumo-svelte": "^0.0.4",
+    "@acoyfellow/kumo-vue": "^0.0.4",
     "@cloudflare/kumo": "^2.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
