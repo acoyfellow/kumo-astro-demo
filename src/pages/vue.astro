@@ -5,9 +5,18 @@ import { Button, Badge, Field, Input } from '@acoyfellow/kumo-vue';
 import '@acoyfellow/kumo-vue/tokens.css';
 import '@acoyfellow/kumo-vue/styles.css';
 import Docs from '../layouts/Docs.astro';
+import { installedVersion } from '../lib/kumoVersion';
+
+// Real installed version of the native Vue package — read from disk.
+const kumoVersion = installedVersion('@acoyfellow/kumo-vue');
 ---
 
-<Docs title="Kumo + Astro — Vue notes" active="vue">
+<Docs
+  title="Kumo + Astro — Vue notes"
+  active="vue"
+  kumoPkg="@acoyfellow/kumo-vue"
+  kumoVersion={kumoVersion}
+>
   <p class="eyebrow">Alternate framework</p>
   <h1 class="title">Kumo in Astro, the Vue way.</h1>
   <p class="lede">

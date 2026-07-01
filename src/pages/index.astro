@@ -8,9 +8,18 @@ import KumoButtons from '../components/react/KumoButtons.jsx';
 import KumoBadges from '../components/react/KumoBadges.jsx';
 import KumoForm from '../components/react/KumoForm.jsx';
 import Docs from '../layouts/Docs.astro';
+import { installedVersion } from '../lib/kumoVersion';
+
+// Real installed version of the canonical React package — read from disk.
+const kumoVersion = installedVersion('@cloudflare/kumo');
 ---
 
-<Docs title="Kumo's React components, straight into Astro" active="react">
+<Docs
+  title="Kumo's React components, straight into Astro"
+  active="react"
+  kumoPkg="@cloudflare/kumo"
+  kumoVersion={kumoVersion}
+>
   <p class="eyebrow">Overview · React</p>
   <h1 class="title">Kumo's React components, straight into Astro.</h1>
   <p class="lede">

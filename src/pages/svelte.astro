@@ -4,9 +4,18 @@
 // Every class on every control below is emitted by the published package.
 import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
 import Docs from '../layouts/Docs.astro';
+import { installedVersion } from '../lib/kumoVersion';
+
+// Real installed version of the native Svelte package — read from disk.
+const kumoVersion = installedVersion('@acoyfellow/kumo-svelte');
 ---
 
-<Docs title="Kumo + Astro — native Svelte components" active="svelte">
+<Docs
+  title="Kumo + Astro — native Svelte components"
+  active="svelte"
+  kumoPkg="@acoyfellow/kumo-svelte"
+  kumoVersion={kumoVersion}
+>
   <p class="eyebrow">Also available as native Svelte</p>
   <h1 class="title">Kumo in Astro, the compiled-native Svelte way.</h1>
   <p class="lede">
