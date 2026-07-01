@@ -151,4 +151,12 @@ const { title, subtitle } = Astro.props;
     line-height: 1.6;
     overflow-x: auto;
   }
+  /* Selected-tab bug: Kumo's highlight <span> ships a `-z-10` utility class, but
+     this Kumo build never compiled `.-z-10` (only `.z-0` / `.z-10` exist), so the
+     span's z-index stays `auto`. As a *positioned* element it then paints ABOVE the
+     in-flow label, and its opaque white `bg-kumo-base` pill hides the selected
+     tab's text. Push the highlight back behind the label at the demo level. */
+  :global([role="tab"] > span[aria-hidden="true"]) {
+    z-index: -10;
+  }
 </style>
