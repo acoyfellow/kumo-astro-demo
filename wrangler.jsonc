@@ -4,7 +4,11 @@
   "compatibility_date": "2025-01-01",
   // Astro builds a fully static site into ./dist; Cloudflare serves it as
   // Workers static assets (no server runtime needed for this demo).
+  "workers_dev": true,
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "routes": [
+    { "pattern": "kumo-astro-demo.coey.dev", "custom_domain": true }
+  ]
 }

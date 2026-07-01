@@ -1,112 +1,99 @@
 ---
-// This page IS your Astro docs site — rendering real Kumo components.
-// No React. No design tokens copied by hand. No inline style hacks.
-// Every class on every control below is emitted by the published package.
-import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
+// HOMEPAGE — the strongest answer: Kumo IS React, and Astro can consume it
+// directly. No compiler needed, no hand-copied tokens. Every component below is
+// the actual @cloudflare/kumo React package, rendered by Astro via @astrojs/react
+// with client:load, styled straight from Kumo's standalone stylesheet.
+import '@cloudflare/kumo/styles/standalone';
+import KumoButtons from '../components/react/KumoButtons.jsx';
+import KumoBadges from '../components/react/KumoBadges.jsx';
+import KumoForm from '../components/react/KumoForm.jsx';
 import Docs from '../layouts/Docs.astro';
 ---
 
-<Docs title="Kumo + Astro — native components in your docs" active="svelte">
-  <p class="eyebrow">Proof of concept</p>
-  <h1 class="title">Your Astro docs, using real Kumo components.</h1>
+<Docs title="Kumo's React components, straight into Astro" active="react">
+  <p class="eyebrow">Overview · React</p>
+  <h1 class="title">Kumo's React components, straight into Astro.</h1>
   <p class="lede">
-    Every interactive control below is the actual <code>@acoyfellow/kumo-svelte</code>
-    component, rendered by Astro and hydrated in the browser — not a React port and
-    not a hand-approximated copy of Kumo's tokens. Nothing here is styled by hand:
-    every class you inspect comes straight from the package. The styling you see is
-    Kumo's own — exactly what the package emits, in full color.
+    Kumo <em>is</em> a React design system — and Astro can consume it directly. The
+    controls below are the actual <code>@cloudflare/kumo</code> React package,
+    rendered by Astro via <code>@astrojs/react</code> and <code>client:load</code>,
+    with styling straight from Kumo's <code>styles/standalone</code> stylesheet.
+    Nothing here is approximated by hand: no compiler, no ported components, no
+    hand-copied tokens. It's the real package, in full color.
   </p>
 
-  <h2 class="section">Buttons — real per-variant colors</h2>
-  <p class="section-sub">
-    The <code>variant</code> prop maps to real Kumo color classes emitted by the
-    package. Open devtools: every class is genuine Kumo, no inline styles.
-  </p>
-
-  <div class="card">
-    <div class="demo-row" data-test="buttons">
-      <Button client:load variant="primary">Get started</Button>
-      <Button client:load variant="secondary">View source</Button>
-      <Button client:load variant="danger">Delete</Button>
-      <Button client:load variant="outline">Outline</Button>
-      <Button client:load variant="ghost">Ghost</Button>
-    </div>
-    <p class="caption">
-      <code>primary</code> renders <code>bg-kumo-brand</code> (brand blue),
-      <code>danger</code> renders <code>bg-kumo-danger</code> (red),
-      <code>secondary</code> the neutral base control, plus <code>outline</code> and
-      <code>ghost</code> — all sourced straight from Kumo's own <code>buttonVariants</code>.
+  <div class="kumo-base">
+    <h2 class="section">Buttons — real Kumo variants</h2>
+    <p class="section-sub">
+      Imported from <code>@cloudflare/kumo/components/button</code>. Open devtools:
+      every class (<code>bg-kumo-base</code>, <code>ring-kumo-brand</code>, …) is
+      emitted by Kumo itself, marked <code>data-kumo-component="Button"</code>.
     </p>
-  </div>
 
-  <h2 class="section">Badges — real per-variant colors</h2>
-  <p class="section-sub">
-    The Kumo <code>Badge</code> component maps its <code>variant</code> prop to real
-    color classes — green, red, blue, amber, purple — straight from the package.
-  </p>
-
-  <div class="card">
-    <div class="demo-row" data-test="badges">
-      <Badge client:load variant="success">Stable</Badge>
-      <Badge client:load variant="error">Deprecated</Badge>
-      <Badge client:load variant="info">New</Badge>
-      <Badge client:load variant="warning">Beta</Badge>
-      <Badge client:load variant="purple">Experimental</Badge>
+    <div class="card">
+      <KumoButtons client:load />
+      <p class="caption">
+        These are React components hydrated by Astro — the same package a Cloudflare
+        dashboard ships. <code>variant="primary"</code> and
+        <code>variant="destructive"</code> use Kumo's emphasis fill;
+        <code>secondary</code>/<code>outline</code>/<code>ghost</code> use its neutral
+        base and line tokens.
+      </p>
     </div>
-    <p class="caption">
-      Each badge renders its own real color: <code>success</code> →
-      <code>bg-kumo-success-tint</code>, <code>error</code> →
-      <code>bg-kumo-danger-tint</code>, <code>info</code> →
-      <code>bg-kumo-info-tint</code>, and so on — exactly what the package emits,
-      no inline styles, no hand-copied tokens.
+
+    <h2 class="section">Badges — real per-variant colors</h2>
+    <p class="section-sub">
+      Imported from <code>@cloudflare/kumo/components/badge</code> — real color
+      classes like <code>bg-kumo-success-tint</code> and <code>text-kumo-danger</code>.
     </p>
-  </div>
 
-  <h2 class="section">Forms work too</h2>
-  <p class="section-sub">
-    Kumo's <code>Field</code> and <code>Input</code> render server-side and hydrate cleanly
-    via <code>client:load</code>. No special handling needed on the Svelte path.
-  </p>
+    <div class="card">
+      <KumoBadges client:load />
+      <p class="caption">
+        Each badge renders its own real color straight from the package — no inline
+        styles, no hand-copied tokens.
+      </p>
+    </div>
 
-  <div class="card">
-    <div class="demo-stack">
-      <Field
-        client:load
-        id="email"
-        label="Work email"
-        description="We'll only use this for release notes."
-        required
-      />
-      <Input client:load placeholder="Search the docs…" />
-      <div>
-        <Button client:load variant="primary">Subscribe</Button>
-      </div>
+    <h2 class="section">Forms — Field + Input, composed the Kumo way</h2>
+    <p class="section-sub">
+      <code>@cloudflare/kumo/components/field</code> wraps
+      <code>@cloudflare/kumo/components/input</code> exactly as Kumo intends —
+      SSR'd by Astro, hydrated in the browser.
+    </p>
+
+    <div class="card">
+      <KumoForm client:load />
     </div>
   </div>
 
-  <h2 class="section">Why this matters</h2>
+  <h2 class="section">Why this is the clean answer</h2>
   <p class="section-sub">
-    The old path forced docs authors to re-approximate Kumo's look by hand because
-    Kumo only shipped React. This repo shows the clean path: consume Kumo's published
-    framework components <em>directly</em> from a plain Astro site — full color, the
-    real package styling, with zero hand-styling.
+    The worry was: "Kumo only ships React, so a non-React docs site has to
+    re-approximate its look by hand." This page disproves that for React itself —
+    Astro renders Kumo's real React components directly, no compiler in the loop.
+    And if your app framework isn't React, Kumo's compiled-native builds cover it
+    too: it's <em>also available</em> as native
+    <a href="/svelte">Svelte</a>, <a href="/vue">Vue</a>, and
+    <a href="/solid">Solid</a>.
   </p>
 
   <h2 class="section">Install &amp; use — the whole recipe</h2>
-  <p class="section-sub">Five lines. This is the entire integration.</p>
-  <pre><code>{`npm i @acoyfellow/kumo-svelte
-// astro.config.mjs -> integrations: [svelte()]
+  <p class="section-sub">Four lines. This is the entire integration.</p>
+  <pre><code>{`npm i @cloudflare/kumo @astrojs/react react react-dom
+// astro.config.mjs -> integrations: [react()]
 
-import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
-import '@acoyfellow/kumo-svelte/styles.css';
-// then: <Button client:load variant="primary">Get started</Button>`}</code></pre>
+import '@cloudflare/kumo/styles/standalone';
+import { Button } from '@cloudflare/kumo/components/button';
+// then in a .jsx component: <Button variant="primary">Get started</Button>
+// and in the .astro page: <MyKumo client:load />`}</code></pre>
 
   <div class="note">
-    <strong>How to read this page:</strong> the surrounding chrome (sidebar, header) is
-    plain HTML/CSS so the proof is unambiguous — anything that looks like a UI control
-    here is a genuine Kumo component, with zero inline styling and zero hand-copied
-    tokens. Buttons and badges render their real per-variant colors straight from the
-    package. The <a href="/vue">Vue path</a> and <a href="/solid">Solid path</a> work
-    the same way — clean SSR + hydrate, all three frameworks from one Astro site.
+    <strong>How to read this page:</strong> the surrounding chrome (sidebar, header)
+    is plain HTML/CSS so the proof is unambiguous — anything that looks like a UI
+    control here is a genuine <code>@cloudflare/kumo</code> React component, hydrated
+    by Astro with zero inline styling and zero hand-copied tokens. The
+    <a href="/svelte">Svelte</a>, <a href="/vue">Vue</a>, and
+    <a href="/solid">Solid</a> pages show the same components as compiled-native builds.
   </div>
 </Docs>
