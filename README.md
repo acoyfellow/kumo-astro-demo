@@ -2,7 +2,7 @@
 
 **Astro consuming [Kumo](https://www.npmjs.com/package/@acoyfellow/kumo-svelte) design-system components directly — no React in the loop, and no hand-approximated tokens.** If your docs (or app) are built on Astro and you previously couldn't consume the React build of Kumo, this is the clean path: install Kumo's published Svelte (or Vue) package and render the real components inside Astro. The styling is Kumo's own — you stop re-creating it by hand.
 
-**Live demo:** https://kumo-astro-demo.coy.workers.dev
+**Live demo:** https://kumo-astro-demo.coey.dev
 
 ## The whole recipe (Svelte — recommended)
 
