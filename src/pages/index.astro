@@ -1,108 +1,33 @@
 ---
-// HOMEPAGE — the strongest answer: Kumo IS React, and Astro can consume it
-// directly. No compiler needed, no hand-copied tokens. Every component below is
-// the actual @cloudflare/kumo React package, rendered by Astro via @astrojs/react
-// with client:load, styled straight from Kumo's standalone stylesheet.
+// React homepage — the actual @cloudflare/kumo React package, rendered by Astro
+// via @astrojs/react + client:load. Fills the shared <Showcase> slots. The page
+// is structurally identical to the Svelte/Vue/Solid pages; only the import source
+// (@cloudflare/kumo) and the version badge differ.
 import '@cloudflare/kumo/styles/standalone';
+import Docs from '../layouts/Docs.astro';
+import Showcase from '../components/Showcase.astro';
+import { installedVersion } from '../lib/kumoVersion';
+
 import KumoButtons from '../components/react/KumoButtons.jsx';
 import KumoBadges from '../components/react/KumoBadges.jsx';
 import KumoForm from '../components/react/KumoForm.jsx';
-import Docs from '../layouts/Docs.astro';
-import { installedVersion } from '../lib/kumoVersion';
+import KumoLinks from '../components/react/KumoLinks.jsx';
+import KumoLoaders from '../components/react/KumoLoaders.jsx';
+import KumoCode from '../components/react/KumoCode.jsx';
 
-// Real installed version of the canonical React package — read from disk.
 const kumoVersion = installedVersion('@cloudflare/kumo');
 ---
 
-<Docs
-  title="Kumo's React components, straight into Astro"
-  active="react"
-  kumoPkg="@cloudflare/kumo"
-  kumoVersion={kumoVersion}
->
-  <p class="eyebrow">Overview · React</p>
-  <h1 class="title">Kumo's React components, straight into Astro.</h1>
-  <p class="lede">
-    Kumo <em>is</em> a React design system — and Astro can consume it directly. The
-    controls below are the actual <code>@cloudflare/kumo</code> React package,
-    rendered by Astro via <code>@astrojs/react</code> and <code>client:load</code>,
-    with styling straight from Kumo's <code>styles/standalone</code> stylesheet.
-    Nothing here is approximated by hand: no compiler, no ported components, no
-    hand-copied tokens. It's the real package, in full color.
-  </p>
-
-  <div class="kumo-base">
-    <h2 class="section">Buttons — real Kumo variants</h2>
-    <p class="section-sub">
-      Imported from <code>@cloudflare/kumo/components/button</code>. Open devtools:
-      every class (<code>bg-kumo-base</code>, <code>ring-kumo-brand</code>, …) is
-      emitted by Kumo itself, marked <code>data-kumo-component="Button"</code>.
-    </p>
-
-    <div class="card">
-      <KumoButtons client:load />
-      <p class="caption">
-        These are React components hydrated by Astro — the same package a Cloudflare
-        dashboard ships. <code>variant="primary"</code> and
-        <code>variant="destructive"</code> use Kumo's emphasis fill;
-        <code>secondary</code>/<code>outline</code>/<code>ghost</code> use its neutral
-        base and line tokens.
-      </p>
-    </div>
-
-    <h2 class="section">Badges — real per-variant colors</h2>
-    <p class="section-sub">
-      Imported from <code>@cloudflare/kumo/components/badge</code> — real color
-      classes like <code>bg-kumo-success-tint</code> and <code>text-kumo-danger</code>.
-    </p>
-
-    <div class="card">
-      <KumoBadges client:load />
-      <p class="caption">
-        Each badge renders its own real color straight from the package — no inline
-        styles, no hand-copied tokens.
-      </p>
-    </div>
-
-    <h2 class="section">Forms — Field + Input, composed the Kumo way</h2>
-    <p class="section-sub">
-      <code>@cloudflare/kumo/components/field</code> wraps
-      <code>@cloudflare/kumo/components/input</code> exactly as Kumo intends —
-      SSR'd by Astro, hydrated in the browser.
-    </p>
-
-    <div class="card">
-      <KumoForm client:load />
-    </div>
-  </div>
-
-  <h2 class="section">Why this is the clean answer</h2>
-  <p class="section-sub">
-    The worry was: "Kumo only ships React, so a non-React docs site has to
-    re-approximate its look by hand." This page disproves that for React itself —
-    Astro renders Kumo's real React components directly, no compiler in the loop.
-    And if your app framework isn't React, Kumo's compiled-native builds cover it
-    too: it's <em>also available</em> as native
-    <a href="/svelte">Svelte</a>, <a href="/vue">Vue</a>, and
-    <a href="/solid">Solid</a>.
-  </p>
-
-  <h2 class="section">Install &amp; use — the whole recipe</h2>
-  <p class="section-sub">Four lines. This is the entire integration.</p>
-  <pre><code>{`npm i @cloudflare/kumo @astrojs/react react react-dom
-// astro.config.mjs -> integrations: [react()]
-
-import '@cloudflare/kumo/styles/standalone';
-import { Button } from '@cloudflare/kumo/components/button';
-// then in a .jsx component: <Button variant="primary">Get started</Button>
-// and in the .astro page: <MyKumo client:load />`}</code></pre>
-
-  <div class="note">
-    <strong>How to read this page:</strong> the surrounding chrome (sidebar, header)
-    is plain HTML/CSS so the proof is unambiguous — anything that looks like a UI
-    control here is a genuine <code>@cloudflare/kumo</code> React component, hydrated
-    by Astro with zero inline styling and zero hand-copied tokens. The
-    <a href="/svelte">Svelte</a>, <a href="/vue">Vue</a>, and
-    <a href="/solid">Solid</a> pages show the same components as compiled-native builds.
-  </div>
+<Docs title="Kumo components in Astro" active="react" kumoPkg="@cloudflare/kumo" kumoVersion={kumoVersion}>
+  <Showcase
+    title="Kumo components in Astro"
+    subtitle="Real Kumo components, rendered by Astro — React here, native Svelte, Vue and Solid alongside."
+  >
+    <KumoButtons client:load slot="buttons" />
+    <KumoBadges client:load slot="badges" />
+    <KumoForm client:load slot="inputs" />
+    <KumoLinks client:load slot="links" />
+    <KumoLoaders client:load slot="loaders" />
+    <KumoCode client:load slot="code" />
+  </Showcase>
 </Docs>

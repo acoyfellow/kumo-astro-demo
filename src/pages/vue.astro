@@ -1,72 +1,51 @@
 ---
-// Vue path. Kumo also publishes precompiled Vue components (@acoyfellow/kumo-vue).
-// They server-render and hydrate cleanly in Astro with normal client:load.
-import { Button, Badge, Field, Input } from '@acoyfellow/kumo-vue';
+// Vue page — Kumo's compiled-native Vue package (@acoyfellow/kumo-vue).
+// Fills the exact same <Showcase> slots as every other page; only the import
+// source and the version badge differ.
+import { Button, Badge, Field, Input, Link, Loader, Code } from '@acoyfellow/kumo-vue';
 import '@acoyfellow/kumo-vue/tokens.css';
 import '@acoyfellow/kumo-vue/styles.css';
 import Docs from '../layouts/Docs.astro';
+import Showcase from '../components/Showcase.astro';
 import { installedVersion } from '../lib/kumoVersion';
 
-// Real installed version of the native Vue package — read from disk.
 const kumoVersion = installedVersion('@acoyfellow/kumo-vue');
 ---
 
-<Docs
-  title="Kumo + Astro — Vue notes"
-  active="vue"
-  kumoPkg="@acoyfellow/kumo-vue"
-  kumoVersion={kumoVersion}
->
-  <p class="eyebrow">Alternate framework</p>
-  <h1 class="title">Kumo in Astro, the Vue way.</h1>
-  <p class="lede">
-    If your stack is Vue instead of Svelte, Kumo has you covered with
-    <code>@acoyfellow/kumo-vue</code>. The components server-render and hydrate
-    with normal <code>client:load</code> — same clean path as Svelte, in full
-    per-variant color.
-  </p>
-
-  <h2 class="section">Buttons &amp; badges — real per-variant colors</h2>
-  <p class="section-sub">
-    Same <code>variant</code> props, same real Kumo color classes as the Svelte page.
-  </p>
-
-  <div class="card">
-    <div class="demo-row">
+<Docs title="Kumo components in Astro" active="vue" kumoPkg="@acoyfellow/kumo-vue" kumoVersion={kumoVersion}>
+  <Showcase
+    title="Kumo components in Astro"
+    subtitle="Real Kumo components, rendered by Astro — React here, native Svelte, Vue and Solid alongside."
+  >
+    <Fragment slot="buttons">
       <Button client:load variant="primary">Get started</Button>
-      <Button client:load variant="secondary">View source</Button>
-      <Button client:load variant="danger">Delete</Button>
+      <Button client:load variant="secondary">Docs</Button>
+      <Button client:load variant="destructive">Delete</Button>
       <Button client:load variant="outline">Outline</Button>
-    </div>
-  </div>
+      <Button client:load variant="ghost">Ghost</Button>
+    </Fragment>
 
-  <div class="card" style="margin-top:1rem;">
-    <div class="demo-row">
+    <Fragment slot="badges">
       <Badge client:load variant="success">Stable</Badge>
+      <Badge client:load variant="warning">Beta</Badge>
       <Badge client:load variant="error">Deprecated</Badge>
       <Badge client:load variant="info">New</Badge>
       <Badge client:load variant="purple">Experimental</Badge>
-    </div>
-  </div>
+    </Fragment>
 
-  <h2 class="section">Form inputs</h2>
-  <p class="section-sub">Same components, same <code>client:load</code> directive.</p>
-
-  <div class="card">
-    <div class="demo-stack">
-      <Field
-        client:load
-        id="email"
-        label="Work email"
-        description="We'll only use this for release notes."
-        required
-      />
+    <Fragment slot="inputs">
+      <Field client:load id="email" label="Work email" />
       <Input client:load placeholder="Search the docs…" />
-    </div>
-  </div>
+    </Fragment>
 
-  <pre><code>{`// On the Vue path, render Kumo components with normal client:load (SSR + hydrate):
-<Button client:load variant="primary">Get started</Button>
-<Field  client:load id="email" label="Work email" required />
-<Input  client:load placeholder="Search the docs…" />`}</code></pre>
+    <Fragment slot="links">
+      <Link client:load href="#">Read the docs</Link>
+      <Link client:load href="#">View source</Link>
+      <Link client:load href="#">Changelog</Link>
+    </Fragment>
+
+    <Loader client:load slot="loaders" />
+
+    <Code client:load slot="code" code="npm i @acoyfellow/kumo-vue" lang="bash" />
+  </Showcase>
 </Docs>

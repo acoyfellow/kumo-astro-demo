@@ -1,114 +1,49 @@
 ---
-// Svelte path — Kumo's compiled-native Svelte package (@acoyfellow/kumo-svelte).
-// No React in this path, no design tokens copied by hand, no inline style hacks.
-// Every class on every control below is emitted by the published package.
-import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
+// Svelte page — Kumo's compiled-native Svelte package (@acoyfellow/kumo-svelte).
+// Fills the exact same <Showcase> slots as every other page; only the import
+// source and the version badge differ.
+import { Button, Badge, Field, Input, Link, Loader, Code } from '@acoyfellow/kumo-svelte';
 import Docs from '../layouts/Docs.astro';
+import Showcase from '../components/Showcase.astro';
 import { installedVersion } from '../lib/kumoVersion';
 
-// Real installed version of the native Svelte package — read from disk.
 const kumoVersion = installedVersion('@acoyfellow/kumo-svelte');
 ---
 
-<Docs
-  title="Kumo + Astro — native Svelte components"
-  active="svelte"
-  kumoPkg="@acoyfellow/kumo-svelte"
-  kumoVersion={kumoVersion}
->
-  <p class="eyebrow">Also available as native Svelte</p>
-  <h1 class="title">Kumo in Astro, the compiled-native Svelte way.</h1>
-  <p class="lede">
-    The <a href="/">homepage</a> renders Kumo's actual React components directly.
-    If your stack is Svelte, Kumo also ships a compiled-native build:
-    <code>@acoyfellow/kumo-svelte</code>. Every interactive control below is that
-    real package, rendered by Astro and hydrated in the browser — not a React port
-    and not a hand-approximated copy of Kumo's tokens. Every class you inspect comes
-    straight from the package, in full color.
-  </p>
-
-  <h2 class="section">Buttons — real per-variant colors</h2>
-  <p class="section-sub">
-    The <code>variant</code> prop maps to real Kumo color classes emitted by the
-    package. Open devtools: every class is genuine Kumo, no inline styles.
-  </p>
-
-  <div class="card">
-    <div class="demo-row" data-test="buttons">
+<Docs title="Kumo components in Astro" active="svelte" kumoPkg="@acoyfellow/kumo-svelte" kumoVersion={kumoVersion}>
+  <Showcase
+    title="Kumo components in Astro"
+    subtitle="Real Kumo components, rendered by Astro — React here, native Svelte, Vue and Solid alongside."
+  >
+    <Fragment slot="buttons">
       <Button client:load variant="primary">Get started</Button>
-      <Button client:load variant="secondary">View source</Button>
-      <Button client:load variant="danger">Delete</Button>
+      <Button client:load variant="secondary">Docs</Button>
+      <Button client:load variant="destructive">Delete</Button>
       <Button client:load variant="outline">Outline</Button>
       <Button client:load variant="ghost">Ghost</Button>
-    </div>
-    <p class="caption">
-      <code>primary</code> renders <code>bg-kumo-brand</code> (brand blue),
-      <code>danger</code> renders <code>bg-kumo-danger</code> (red),
-      <code>secondary</code> the neutral base control, plus <code>outline</code> and
-      <code>ghost</code> — all sourced straight from Kumo's own <code>buttonVariants</code>.
-    </p>
-  </div>
+    </Fragment>
 
-  <h2 class="section">Badges — real per-variant colors</h2>
-  <p class="section-sub">
-    The Kumo <code>Badge</code> component maps its <code>variant</code> prop to real
-    color classes — green, red, blue, amber, purple — straight from the package.
-  </p>
-
-  <div class="card">
-    <div class="demo-row" data-test="badges">
+    <Fragment slot="badges">
       <Badge client:load variant="success">Stable</Badge>
+      <Badge client:load variant="warning">Beta</Badge>
       <Badge client:load variant="error">Deprecated</Badge>
       <Badge client:load variant="info">New</Badge>
-      <Badge client:load variant="warning">Beta</Badge>
       <Badge client:load variant="purple">Experimental</Badge>
-    </div>
-    <p class="caption">
-      Each badge renders its own real color: <code>success</code> →
-      <code>bg-kumo-success-tint</code>, <code>error</code> →
-      <code>bg-kumo-danger-tint</code>, <code>info</code> →
-      <code>bg-kumo-info-tint</code>, and so on — exactly what the package emits,
-      no inline styles, no hand-copied tokens.
-    </p>
-  </div>
+    </Fragment>
 
-  <h2 class="section">Forms work too</h2>
-  <p class="section-sub">
-    Kumo's <code>Field</code> and <code>Input</code> render server-side and hydrate cleanly
-    via <code>client:load</code>. No special handling needed on the Svelte path.
-  </p>
-
-  <div class="card">
-    <div class="demo-stack">
-      <Field
-        client:load
-        id="email"
-        label="Work email"
-        description="We'll only use this for release notes."
-        required
-      />
+    <Fragment slot="inputs">
+      <Field client:load id="email" label="Work email" />
       <Input client:load placeholder="Search the docs…" />
-      <div>
-        <Button client:load variant="primary">Subscribe</Button>
-      </div>
-    </div>
-  </div>
+    </Fragment>
 
-  <h2 class="section">Install &amp; use — the whole recipe</h2>
-  <p class="section-sub">Five lines. This is the entire integration.</p>
-  <pre><code>{`npm i @acoyfellow/kumo-svelte
-// astro.config.mjs -> integrations: [svelte()]
+    <Fragment slot="links">
+      <Link client:load href="#">Read the docs</Link>
+      <Link client:load href="#">View source</Link>
+      <Link client:load href="#">Changelog</Link>
+    </Fragment>
 
-import { Button, Badge, Field, Input } from '@acoyfellow/kumo-svelte';
-import '@acoyfellow/kumo-svelte/styles.css';
-// then: <Button client:load variant="primary">Get started</Button>`}</code></pre>
+    <Loader client:load slot="loaders" />
 
-  <div class="note">
-    <strong>How to read this page:</strong> the surrounding chrome (sidebar, header) is
-    plain HTML/CSS so the proof is unambiguous — anything that looks like a UI control
-    here is a genuine Kumo component, with zero inline styling and zero hand-copied
-    tokens. The <a href="/">React homepage</a>, the <a href="/vue">Vue path</a>, and the
-    <a href="/solid">Solid path</a> all work the same way — real Kumo components,
-    from one Astro site.
-  </div>
+    <Code client:load slot="code" code="npm i @acoyfellow/kumo-svelte" lang="bash" />
+  </Showcase>
 </Docs>

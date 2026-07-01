@@ -35,20 +35,19 @@ const { title, active = 'react', kumoPkg, kumoVersion } = Astro.props;
           <span class="brand-name"><span class="brand-accent">Kumo</span>&nbsp;Docs</span>
         </div>
         <nav>
-          <p class="nav-group">Getting started</p>
-          <a class="nav-link" href="/" aria-current={active === 'react' ? 'page' : undefined}>Overview (React)</a>
-          <p class="nav-group">Also native</p>
+          <p class="nav-group">Frameworks</p>
+          <a class="nav-link" href="/" aria-current={active === 'react' ? 'page' : undefined}>React</a>
           <a class="nav-link" href="/svelte" aria-current={active === 'svelte' ? 'page' : undefined}>Svelte</a>
           <a class="nav-link" href="/vue" aria-current={active === 'vue' ? 'page' : undefined}>Vue</a>
           <a class="nav-link" href="/solid" aria-current={active === 'solid' ? 'page' : undefined}>Solid</a>
           <p class="nav-group">Reference</p>
-          <a class="nav-link" href="https://github.com/acoyfellow/kumo-astro-demo">Source on GitHub</a>
+          <a class="nav-link" href="https://github.com/acoyfellow/kumo-astro-demo">Source</a>
         </nav>
       </aside>
 
       <div class="content">
         <header class="topbar">
-          <span class="crumbs">Docs / <strong>Overview</strong></span>
+          <span class="crumbs">Kumo / <strong>Components</strong></span>
           <span class="topbar-right">
             <span class="version-pill" title="Real installed version, read from node_modules package.json at build time">
               <code class="version-pkg">{kumoPkg}</code>
@@ -61,10 +60,7 @@ const { title, active = 'react', kumoPkg, kumoVersion } = Astro.props;
           <slot />
         </main>
         <footer class="footer">
-          Built with Astro + Kumo. The homepage renders Kumo's real
-          <code>@cloudflare/kumo</code> React components directly; the Svelte/Vue/Solid
-          pages render Kumo's compiled-native builds. All real components — nothing
-          approximated by hand.
+          Built with Astro + Kumo.
         </footer>
       </div>
     </div>
