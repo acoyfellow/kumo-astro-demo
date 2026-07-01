@@ -28,8 +28,48 @@ const { title, subtitle } = Astro.props;
   </section>
 
   <section class="group">
+    <h2 class="label">Text</h2>
+    <div class="surface"><div class="stack"><slot name="text" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Label</h2>
+    <div class="surface"><div class="row"><slot name="label" /></div></div>
+  </section>
+
+  <section class="group">
     <h2 class="label">Inputs</h2>
     <div class="surface"><div class="stack"><slot name="inputs" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Text area</h2>
+    <div class="surface"><div class="stack"><slot name="inputarea" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Checkbox</h2>
+    <div class="surface"><div class="stack"><slot name="checkbox" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Switch</h2>
+    <div class="surface"><div class="row"><slot name="switch" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Tabs</h2>
+    <div class="surface"><slot name="tabs" /></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Meter</h2>
+    <div class="surface"><div class="stack"><slot name="meter" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Empty state</h2>
+    <div class="surface"><slot name="empty" /></div>
   </section>
 
   <section class="group">
@@ -40,6 +80,11 @@ const { title, subtitle } = Astro.props;
   <section class="group">
     <h2 class="label">Loaders</h2>
     <div class="surface"><div class="row"><slot name="loaders" /></div></div>
+  </section>
+
+  <section class="group">
+    <h2 class="label">Cloudflare logo</h2>
+    <div class="surface"><div class="row logo-row"><slot name="logo" /></div></div>
   </section>
 
   <section class="group">
@@ -90,6 +135,7 @@ const { title, subtitle } = Astro.props;
     align-items: center;
     gap: 1.25rem;
   }
+  .logo-row :global(svg) { height: 2.25rem; width: auto; }
   .stack {
     display: flex;
     flex-direction: column;

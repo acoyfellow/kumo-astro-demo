@@ -2,7 +2,10 @@
 // Solid page — Kumo's compiled-native Solid package (@acoyfellow/kumo-solid).
 // Fills the exact same <Showcase> slots as every other page; only the import
 // source and the version badge differ.
-import { Button, Badge, Field, Input, Link, Loader, Code } from '@acoyfellow/kumo-solid';
+import {
+  Button, Badge, Text, Label, Field, Input, InputArea,
+  Checkbox, Switch, Tabs, Meter, Empty, Link, Loader, CloudflareLogo, Code,
+} from '@acoyfellow/kumo-solid';
 import '@acoyfellow/kumo-solid/tokens.css';
 import '@acoyfellow/kumo-solid/styles.css';
 import Docs from '../layouts/Docs.astro';
@@ -10,6 +13,11 @@ import Showcase from '../components/Showcase.astro';
 import { installedVersion } from '../lib/kumoVersion';
 
 const kumoVersion = installedVersion('@acoyfellow/kumo-solid');
+const tabs = [
+  { label: 'Overview', value: 'overview' },
+  { label: 'Usage', value: 'usage' },
+  { label: 'API', value: 'api' },
+];
 ---
 
 <Docs title="Kumo components in Astro" active="solid" kumoPkg="@acoyfellow/kumo-solid" kumoVersion={kumoVersion}>
@@ -33,10 +41,42 @@ const kumoVersion = installedVersion('@acoyfellow/kumo-solid');
       <Badge client:load variant="purple">Experimental</Badge>
     </Fragment>
 
+    <Fragment slot="text">
+      <Text client:load variant="heading1" as="h1">Title</Text>
+      <Text client:load variant="mono">code</Text>
+      <Text client:load>Body</Text>
+    </Fragment>
+
+    <Fragment slot="label">
+      <Label client:load>Work email</Label>
+      <Label client:load showOptional>Middle Name</Label>
+    </Fragment>
+
     <Fragment slot="inputs">
       <Field client:load id="email" label="Work email" />
       <Input client:load placeholder="Search the docs…" />
     </Fragment>
+
+    <InputArea client:load slot="inputarea" placeholder="Write a comment…" />
+
+    <Fragment slot="checkbox">
+      <Checkbox client:load label="Accept terms and conditions" defaultChecked />
+      <Checkbox client:load label="Enable notifications" />
+    </Fragment>
+
+    <Fragment slot="switch">
+      <Switch client:load label="Enable notifications" defaultChecked />
+      <Switch client:load label="Reduced motion" />
+    </Fragment>
+
+    <Tabs client:load slot="tabs" tabs={tabs} selectedValue="overview" />
+
+    <Fragment slot="meter">
+      <Meter client:load label="Storage used" value={65} />
+      <Meter client:load label="API requests" value={40} />
+    </Fragment>
+
+    <Empty client:load slot="empty" title="No results" />
 
     <Fragment slot="links">
       <Link client:load href="#">Read the docs</Link>
@@ -45,6 +85,8 @@ const kumoVersion = installedVersion('@acoyfellow/kumo-solid');
     </Fragment>
 
     <Loader client:load slot="loaders" />
+
+    <CloudflareLogo client:load slot="logo" />
 
     <Code client:load slot="code" code="npm i @acoyfellow/kumo-solid" lang="bash" />
   </Showcase>

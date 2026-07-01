@@ -10,9 +10,18 @@ import { installedVersion } from '../lib/kumoVersion';
 
 import KumoButtons from '../components/react/KumoButtons.jsx';
 import KumoBadges from '../components/react/KumoBadges.jsx';
+import KumoText from '../components/react/KumoText.jsx';
+import KumoLabel from '../components/react/KumoLabel.jsx';
 import KumoForm from '../components/react/KumoForm.jsx';
+import KumoInputArea from '../components/react/KumoInputArea.jsx';
+import KumoCheckbox from '../components/react/KumoCheckbox.jsx';
+import KumoSwitch from '../components/react/KumoSwitch.jsx';
+import KumoTabs from '../components/react/KumoTabs.jsx';
+import KumoMeter from '../components/react/KumoMeter.jsx';
+import KumoEmpty from '../components/react/KumoEmpty.jsx';
 import KumoLinks from '../components/react/KumoLinks.jsx';
 import KumoLoaders from '../components/react/KumoLoaders.jsx';
+import KumoLogo from '../components/react/KumoLogo.jsx';
 import KumoCode from '../components/react/KumoCode.jsx';
 
 const kumoVersion = installedVersion('@cloudflare/kumo');
@@ -25,9 +34,18 @@ const kumoVersion = installedVersion('@cloudflare/kumo');
   >
     <KumoButtons client:load slot="buttons" />
     <KumoBadges client:load slot="badges" />
+    <KumoText client:load slot="text" />
+    <KumoLabel client:load slot="label" />
     <KumoForm client:load slot="inputs" />
+    <KumoInputArea client:load slot="inputarea" />
+    <KumoCheckbox client:load slot="checkbox" />
+    <KumoSwitch client:load slot="switch" />
+    <KumoTabs client:load slot="tabs" />
+    <KumoMeter client:load slot="meter" />
+    <KumoEmpty client:load slot="empty" />
     <KumoLinks client:load slot="links" />
     <KumoLoaders client:load slot="loaders" />
+    <KumoLogo client:load slot="logo" />
     <KumoCode client:load slot="code" />
   </Showcase>
 </Docs>
