@@ -32,7 +32,7 @@ const { title, active = 'react', kumoPkg, kumoVersion } = Astro.props;
     <div class="shell">
       <aside class="sidebar">
         <div class="brand">
-          <span class="brand-name"><span class="brand-accent">Kumo</span>&nbsp;Docs</span>
+          <span class="brand-name"><span class="brand-accent">Kumo</span>&nbsp;in Astro <span class="brand-tag">demo</span></span>
         </div>
         <nav>
           <p class="nav-group">Frameworks</p>
@@ -47,7 +47,7 @@ const { title, active = 'react', kumoPkg, kumoVersion } = Astro.props;
 
       <div class="content">
         <header class="topbar">
-          <span class="crumbs">Kumo / <strong>Components</strong></span>
+          <span class="crumbs">Demo / <strong>Kumo in Astro</strong></span>
           <span class="topbar-right">
             <span class="version-pill" title="Real installed version, read from node_modules package.json at build time">
               <code class="version-pkg">{kumoPkg}</code>
@@ -95,6 +95,7 @@ const { title, active = 'react', kumoPkg, kumoVersion } = Astro.props;
       .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.1rem; margin-bottom: 1.5rem; letter-spacing: -.01em; }
       .brand-name { color: var(--doc-text); }
       .brand-accent { color: var(--doc-accent); }
+      .brand-tag { font-size: .62rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--doc-muted); border: 1px solid var(--doc-line); border-radius: 999px; padding: .05rem .35rem; margin-left: .1rem; }
       .nav-group { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--doc-muted); margin: 1.25rem 0 .4rem; }
       .nav-link { display: block; padding: .35rem .5rem; border-radius: 8px; color: var(--doc-text); text-decoration: none; font-size: .9rem; }
       .nav-link:hover { background: #f1f1f4; }
