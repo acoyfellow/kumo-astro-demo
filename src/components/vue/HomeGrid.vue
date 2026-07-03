@@ -164,7 +164,7 @@ const ignoreDateChange = () => {};
       <a :href="routeOf('input')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Input</a>
       <div class="grid gap-3">
         <Input placeholder="Type something..." />
-        <Input default-value="Invalid!" :aria-invalid="true" />
+        <Input variant="error" value="Invalid!" />
       </div>
     </li>
 

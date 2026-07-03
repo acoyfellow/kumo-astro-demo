@@ -160,7 +160,7 @@
   {#snippet b_input()}
     <div class="grid gap-3">
       <Input placeholder="Type something..." />
-      <Input variant="error" defaultValue="Invalid!" />
+      <Input variant="error" value="Invalid!" />
     </div>
   {/snippet}
   {@render box('Input', 'input', b_input)}

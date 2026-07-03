@@ -147,7 +147,7 @@ export function HomeGrid(): JSX.Element {
       <Cell name="Input" id="input">
         <div class="grid gap-3">
           <Input placeholder="Type something..." />
-          <Input defaultValue="Invalid!" aria-invalid="true" />
+          <Input variant="error" value="Invalid!" />
         </div>
       </Cell>
 
