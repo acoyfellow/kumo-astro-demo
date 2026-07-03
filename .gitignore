@@ -9,6 +9,9 @@ node_modules/
 .wrangler/
 .dev.vars
 
+# generated browser-audit receipts and screenshots
+artifacts/
+
 # logs
 *.log
 npm-debug.log*
