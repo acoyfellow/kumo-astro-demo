@@ -17,6 +17,7 @@ import {
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
   SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty,
 } from '@acoyfellow/kumo-vue';
+import { ref } from 'vue';
 
 const TableHeader = Table.Header;
 const TableBody = Table.Body;
@@ -27,6 +28,8 @@ const LayerCardPrimary = LayerCard.Primary;
 const LayerCardSecondary = LayerCard.Secondary;
 
 const routeOf = (id: string) => `/components/${id}`;
+const paginationPage = ref(1);
+const setPaginationPage = (page: number) => { paginationPage.value = page; };
 
 const selectFixture = {
   export: 'root', props: {}, children: [
@@ -224,7 +227,7 @@ const menuOptions = [
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('pagination')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Pagination</a>
-      <Pagination :page="1" :per-page="10" :total-count="100" />
+      <Pagination :page="paginationPage" :per-page="10" :total-count="100" :set-page="setPaginationPage" />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">

@@ -13,7 +13,7 @@ import {
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
   SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty,
 } from '@acoyfellow/kumo-solid';
-import type { JSX } from 'solid-js';
+import { createSignal, type JSX } from 'solid-js';
 
 const routeOf = (id: string) => `/components/${id}`;
 
@@ -92,6 +92,8 @@ function Cell(props: { name: string; id: string; children: JSX.Element }) {
 }
 
 export function HomeGrid(): JSX.Element {
+  const [paginationPage, setPaginationPage] = createSignal(1);
+
   return (
     <ul class="grid auto-rows-min grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       <Cell name="Button" id="button">
@@ -201,7 +203,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Pagination" id="pagination">
-        <Pagination page={1} perPage={10} totalCount={100} />
+        <Pagination page={paginationPage()} perPage={10} totalCount={100} setPage={setPaginationPage} />
       </Cell>
 
       <Cell name="InputArea" id="input-area">
