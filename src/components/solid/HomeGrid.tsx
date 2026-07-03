@@ -152,7 +152,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Select" id="select">
-        <Select placeholder="Select a version..." fixture={selectFixture} />
+        <Select fixture={selectFixture} />
       </Cell>
 
       <Cell name="Combobox" id="combobox">

@@ -165,7 +165,7 @@
   {/snippet}
   {@render box('Input', 'input', b_input)}
 
-  {#snippet b_select()}<Select className="w-[200px]" placeholder="Select a version..." fixture={selectFixture} />{/snippet}
+  {#snippet b_select()}<Select className="w-[200px]" fixture={selectFixture} />{/snippet}
   {@render box('Select', 'select', b_select)}
 
   {#snippet b_combobox()}<Combobox fixture={comboboxFixture} />{/snippet}

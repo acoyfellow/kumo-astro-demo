@@ -75,7 +75,7 @@ const selectLabels: Record<string, string> = {
   active: 'Active versions',
   specific: 'Specific versions',
 };
-const renderSelectValue = (value: unknown) => value ? selectLabels[String(value)] : 'Select a version...';
+const renderSelectValue = (value: unknown) => value ? selectLabels[String(value)] : undefined;
 const selectFixture = {
   export: 'root', props: {}, children: [
     { export: '.Option', props: { value: 'all' }, children: [{ text: 'All deployed versions' }] },
