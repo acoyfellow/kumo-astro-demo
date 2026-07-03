@@ -1,12 +1,8 @@
-// Native SOLID homepage grid — a 1:1 rebuild of the kumo-ui.com HomeGrid
-// (see /tmp/kumo-golden/HomeGrid.tsx) rendered with the compiled-native
-// @acoyfellow/kumo-solid components. Same sections and grid geometry as the
-// golden `/` React route, zero React shipped.
-//
-// Interactive/compound Kumo components (Select, Combobox, Dialog, Popover,
-// DropdownMenu, Radio) consume the compiler's native `fixture` contract.
-// Structural compounds (Table, LayerCard) use the native sub-components. No
-// raw-HTML injection, no demo-CSS, no hand-rolled lookalikes.
+// Native SOLID homepage grid matching the canonical kumo-ui.com HomeGrid
+// (see /tmp/kumo-golden/HomeGrid.tsx) with the currently exported
+// @acoyfellow/kumo-solid components. Interactive compound components consume
+// the compiler's native `fixture` contract; unavailable native components are
+// called out rather than recreated with local lookalikes.
 import {
   Badge, Banner, Button, Checkbox, ClipboardText, Code, Combobox,
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
@@ -15,7 +11,43 @@ import {
 } from '@acoyfellow/kumo-solid';
 import { createSignal, type JSX } from 'solid-js';
 
-const routeOf = (id: string) => `/components/${id}`;
+const componentRoutes: Record<string, string> = {
+  badge: '/components/badge',
+  banner: '/components/banner',
+  breadcrumbs: '/components/breadcrumbs',
+  button: '/components/button',
+  checkbox: '/components/checkbox',
+  'clipboard-text': '/components/clipboard-text',
+  code: '/components/code',
+  collapsible: '/components/collapsible',
+  combobox: '/components/combobox',
+  'command-palette': '/components/command-palette',
+  'date-range-picker': '/components/date-range-picker',
+  dialog: '/components/dialog',
+  dropdown: '/components/dropdown',
+  empty: '/components/empty',
+  grid: '/components/grid',
+  input: '/components/input',
+  'input-area': '/components/input',
+  label: '/components/label',
+  'layer-card': '/components/layer-card',
+  loader: '/components/loader',
+  menubar: '/components/menubar',
+  meter: '/components/meter',
+  pagination: '/components/pagination',
+  popover: '/components/popover',
+  radio: '/components/radio',
+  select: '/components/select',
+  'sensitive-input': '/components/sensitive-input',
+  'skeleton-line': '/components/skeleton-line',
+  surface: '/components/surface',
+  switch: '/components/switch',
+  table: '/components/table',
+  tabs: '/components/tabs',
+  text: '/components/text',
+  toast: '/components/toast',
+  tooltip: '/components/tooltip',
+};
 
 const selectFixture = {
   export: 'root', props: {}, children: [
@@ -78,20 +110,26 @@ const tabs = [
   { value: 'contact', label: 'Contact' },
 ];
 const menuOptions = [
-  { icon: 'B', onClick: () => {}, tooltip: 'Bold' },
-  { icon: 'I', onClick: () => {}, tooltip: 'Italic' },
+  { id: 'bold', icon: <strong>B</strong>, onClick: () => {}, tooltip: 'Bold' },
+  { id: 'italic', icon: <em>I</em>, onClick: () => {}, tooltip: 'Italic' },
 ];
 
 function Cell(props: { name: string; id: string; children: JSX.Element }) {
   return (
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
-      <a href={routeOf(props.id)} class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">{props.name}</a>
+      <a href={componentRoutes[props.id]} class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">{props.name}</a>
       {props.children}
     </li>
   );
 }
 
+function Unavailable(): JSX.Element {
+  return <span class="text-xs text-kumo-inactive italic">not exported by @acoyfellow/kumo-solid</span>;
+}
+
 export function HomeGrid(): JSX.Element {
+  const [switchToggled, setSwitchToggled] = createSignal(true);
+  const [checked, setChecked] = createSignal(true);
   const [paginationPage, setPaginationPage] = createSignal(1);
 
   return (
@@ -107,7 +145,7 @@ export function HomeGrid(): JSX.Element {
       <Cell name="Input" id="input">
         <div class="grid gap-3">
           <Input placeholder="Type something..." />
-          <Input defaultValue="Invalid!" />
+          <Input defaultValue="Invalid!" aria-invalid="true" />
         </div>
       </Cell>
 
@@ -120,11 +158,11 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Switch" id="switch">
-        <Switch defaultChecked />
+        <Switch checked={switchToggled()} onCheckedChange={setSwitchToggled} />
       </Cell>
 
       <Cell name="Input (with validation)" id="input">
-        <Input label="Email" placeholder="name@example.com" type="email" />
+        <Input label="Email" placeholder="name@example.com" type="email" aria-invalid="true" />
       </Cell>
 
       <Cell name="Dialog" id="dialog">
@@ -132,25 +170,19 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Tooltip" id="tooltip">
-        <div class="flex gap-2">
-          <Button>Add</Button>
-          <Button>Translate</Button>
-        </div>
+        <Unavailable />
       </Cell>
 
       <Cell name="Dropdown" id="dropdown">
-        <DropdownMenu fixture={dropdownFixture} />
+        <DropdownMenu open fixture={dropdownFixture} />
       </Cell>
 
       <Cell name="Collapsible" id="collapsible">
-        <div class="flex w-[200px] flex-col gap-1">
-          <span class="text-base font-medium text-kumo-default">What is Kumo?</span>
-          <span class="text-sm text-kumo-subtle">Kumo is Cloudflare's component library.</span>
-        </div>
+        <Unavailable />
       </Cell>
 
       <Cell name="Checkbox" id="checkbox">
-        <Checkbox label="Max bandwidth" defaultChecked />
+        <Checkbox label="Max bandwidth" checked={checked()} onCheckedChange={setChecked} />
       </Cell>
 
       <Cell name="LayerCard" id="layer-card">
@@ -165,7 +197,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="SkeletonLine" id="skeleton-line">
-        <span class="text-xs text-kumo-inactive italic">no native emitter yet</span>
+        <Unavailable />
       </Cell>
 
       <Cell name="Surface" id="surface">
@@ -178,9 +210,9 @@ export function HomeGrid(): JSX.Element {
 
       <Cell name="Banner" id="banner">
         <div class="flex flex-col gap-2">
-          <Banner variant="default">This is a default banner.</Banner>
-          <Banner variant="alert">This is an alert banner.</Banner>
-          <Banner variant="error">This is an error banner.</Banner>
+          <Banner title="This is a default banner." />
+          <Banner title="This is an alert banner." variant="alert" />
+          <Banner title="This is an error banner." variant="error" />
         </div>
       </Cell>
 
@@ -219,7 +251,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="DateRangePicker" id="date-range-picker">
-        <div class="scale-90"><DateRangePicker /></div>
+        <div class="scale-90"><DateRangePicker onStartChange={() => {}} onEndChange={() => {}} /></div>
       </Cell>
 
       <Cell name="Breadcrumbs" id="breadcrumbs">
