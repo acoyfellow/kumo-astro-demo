@@ -337,7 +337,7 @@ export function HomeGrid(): JSX.Element {
         <div class="flex flex-col gap-1">
           <Text size="lg" bold>Large Bold Text</Text>
           <Text size="base">Regular text content</Text>
-          <Text size="sm">Small subtle text</Text>
+          <Text size="sm" color="subtle">Small subtle text</Text>
         </div>
       </Cell>
     </ul>
