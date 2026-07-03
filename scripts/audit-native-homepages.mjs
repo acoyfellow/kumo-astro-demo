@@ -199,10 +199,14 @@ async function auditRoute(route) {
   });
 
   await runStep(routeReceipt, 'toast appears from its visible trigger', async () => {
-    const toastCell = cell(page, 'Toast');
-    const trigger = toastCell.getByRole('button', { name: 'Give me a toast', exact: true });
+    // Toasty portals its viewport to document.body (matching canonical React), so
+    // the resulting status role lives OUTSIDE the grid cell -- query document-wide,
+    // the same pattern already used for dialog/dropdown/popover below. Scoped to the
+    // real Toast element because the page also has an unrelated SVG loader with
+    // role=status elsewhere in the grid.
+    const trigger = cell(page, 'Toast').getByRole('button', { name: 'Give me a toast', exact: true });
     await trigger.click();
-    const status = toastCell.getByRole('status');
+    const status = page.locator('[role=status][data-kumo-component=Toast]').filter({ visible: true });
     await status.waitFor({ state: 'visible' });
     return { status: (await status.innerText()).trim() };
   });
