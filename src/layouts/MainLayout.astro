@@ -1,0 +1,43 @@
+---
+// Golden layout — mirrors kumo-docs-astro's BaseLayout + MainLayout geometry:
+// a 48px (w-12) sidebar rail with a right hairline, and a main content area
+// offset by that rail (ml-12). BaseLayout is folded in here so the golden `/`
+// route is self-contained. The kumo theme + Tailwind utilities come from
+// global.css (the same tokens the canonical docs site ships).
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'Kumo', description = 'Kumo – a modern component library' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-kumo-canvas text-kumo-default antialiased">
+    <div class="min-h-screen isolate">
+      <!-- Collapsed sidebar rail (w-12 = 48px) with hairline, matching the golden. -->
+      <aside
+        class="fixed top-0 left-0 z-40 flex h-screen w-12 flex-col border-r border-kumo-line bg-kumo-elevated"
+        data-sidebar-open="false"
+      >
+      </aside>
+
+      <!-- Main content area, offset by the rail. -->
+      <div
+        id="main-content"
+        class="main-content ml-12 h-screen overflow-y-auto overscroll-y-none"
+      >
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>

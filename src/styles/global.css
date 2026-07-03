@@ -1,0 +1,15 @@
+/*
+ * Golden route styling — the exact mechanism kumo-docs-astro uses.
+ * Tailwind v4 generates the layout utilities HomeGrid relies on
+ * (grid-cols, aspect-square, ring-1, top-4, w-[200px], …) and the
+ * @cloudflare/kumo theme supplies every kumo-* color token + component
+ * style. Tailwind scans the kumo dist bundle (for the component class
+ * strings) and this project's React components (for HomeGrid's classes).
+ */
+@import "tailwindcss";
+@import "@cloudflare/kumo/styles/tailwind";
+
+@source "../../node_modules/@cloudflare/kumo/dist";
+@source "../components";
+@source "../pages";
+@source "../layouts";

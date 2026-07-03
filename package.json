@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Astro consuming Kumo design-system components directly — no React, no hand-approximated tokens.",
+  "description": "Astro consuming Kumo design-system components directly: canonical @cloudflare/kumo React on / plus native Svelte, Vue and Solid — no hand-approximated tokens.",
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",
@@ -16,6 +16,7 @@
     "@acoyfellow/kumo-svelte": "^0.0.4",
     "@acoyfellow/kumo-vue": "^0.0.4",
     "@cloudflare/kumo": "^2.6.0",
+    "@phosphor-icons/react": "^2.1.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -24,11 +25,13 @@
     "@astrojs/solid-js": "7.0.0",
     "@astrojs/svelte": "7.2.5",
     "@astrojs/vue": "5.1.4",
+    "@tailwindcss/vite": "^4.3.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "astro": "5.18.2",
     "solid-js": "1.9.13",
     "svelte": "5.56.4",
+    "tailwindcss": "^4.3.2",
     "typescript": "5.9.3",
     "vue": "3.5.39",
     "wrangler": "^4.0.0"

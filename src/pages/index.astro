@@ -1,51 +1,20 @@
 ---
-// React homepage — the actual @cloudflare/kumo React package, rendered by Astro
-// via @astrojs/react + client:load. Fills the shared <Showcase> slots. The page
-// is structurally identical to the Svelte/Vue/Solid pages; only the import source
-// (@cloudflare/kumo) and the version badge differ.
-import '@cloudflare/kumo/styles/standalone';
-import Docs from '../layouts/Docs.astro';
-import Showcase from '../components/Showcase.astro';
-import { installedVersion } from '../lib/kumoVersion';
-
-import KumoButtons from '../components/react/KumoButtons.jsx';
-import KumoBadges from '../components/react/KumoBadges.jsx';
-import KumoText from '../components/react/KumoText.jsx';
-import KumoLabel from '../components/react/KumoLabel.jsx';
-import KumoForm from '../components/react/KumoForm.jsx';
-import KumoInputArea from '../components/react/KumoInputArea.jsx';
-import KumoCheckbox from '../components/react/KumoCheckbox.jsx';
-import KumoSwitch from '../components/react/KumoSwitch.jsx';
-import KumoTabs from '../components/react/KumoTabs.jsx';
-import KumoMeter from '../components/react/KumoMeter.jsx';
-import KumoEmpty from '../components/react/KumoEmpty.jsx';
-import KumoLinks from '../components/react/KumoLinks.jsx';
-import KumoLoaders from '../components/react/KumoLoaders.jsx';
-import KumoLogo from '../components/react/KumoLogo.jsx';
-import KumoCode from '../components/react/KumoCode.jsx';
-
-const kumoVersion = installedVersion('@cloudflare/kumo');
+// GOLDEN route (`/`): a faithful 1:1 reproduction of the kumo-ui.com homepage
+// (cloudflare/fe/kumo → kumo-docs-astro). HomeGrid is the canonical
+// @cloudflare/kumo React island rendering all 39 catalog components in a grid.
+// This is the baseline the /svelte, /vue and /solid routes diff against.
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import { HomeGrid } from '../components/react/HomeGrid';
 ---
 
-<Docs title="Kumo components in Astro" active="react" kumoPkg="@cloudflare/kumo" kumoVersion={kumoVersion}>
-  <Showcase
-    title="Kumo components in Astro"
-    subtitle="Real Kumo components, rendered by Astro — React here, native Svelte, Vue and Solid alongside."
-  >
-    <KumoButtons client:load slot="buttons" />
-    <KumoBadges client:load slot="badges" />
-    <KumoText client:load slot="text" />
-    <KumoLabel client:load slot="label" />
-    <KumoForm client:load slot="inputs" />
-    <KumoInputArea client:load slot="inputarea" />
-    <KumoCheckbox client:load slot="checkbox" />
-    <KumoSwitch client:load slot="switch" />
-    <KumoTabs client:load slot="tabs" />
-    <KumoMeter client:load slot="meter" />
-    <KumoEmpty client:load slot="empty" />
-    <KumoLinks client:load slot="links" />
-    <KumoLoaders client:load slot="loaders" />
-    <KumoLogo client:load slot="logo" />
-    <KumoCode client:load slot="code" />
-  </Showcase>
-</Docs>
+<MainLayout title="Kumo" description="Kumo – a modern component library">
+  <div class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex grow flex-col pr-12">
+      <div class="mx-auto w-full grow border-r border-kumo-line">
+        <HomeGrid client:only="react" />
+      </div>
+    </main>
+  </div>
+</MainLayout>
