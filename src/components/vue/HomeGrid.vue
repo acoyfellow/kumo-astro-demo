@@ -148,8 +148,14 @@ const ignoreDateChange = () => {};
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('button')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Button</a>
       <div class="grid gap-3">
-        <Button>Create Worker</Button>
-        <Button variant="primary">Create Worker</Button>
+        <Button>
+          <template #icon><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg></template>
+          Create Worker
+        </Button>
+        <Button variant="primary">
+          <template #icon><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg></template>
+          Create Worker
+        </Button>
         <Button :loading="true">Create Worker</Button>
       </div>
     </li>

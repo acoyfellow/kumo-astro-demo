@@ -147,10 +147,11 @@
 {/snippet}
 
 <ul class="grid auto-rows-min grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+  {#snippet plusIcon()}<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>{/snippet}
   {#snippet b_button()}
     <div class="grid gap-3">
-      <Button>Create Worker</Button>
-      <Button variant="primary">Create Worker</Button>
+      <Button icon={plusIcon}>Create Worker</Button>
+      <Button variant="primary" icon={plusIcon}>Create Worker</Button>
       <Button loading>Create Worker</Button>
     </div>
   {/snippet}
