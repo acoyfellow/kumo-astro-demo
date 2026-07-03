@@ -164,7 +164,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Input (with validation)" id="input">
-        <Input label="Email" placeholder="name@example.com" type="email" aria-invalid="true" />
+        <Input label="Email" placeholder="name@example.com" type="email" variant="error" error={{ message: 'Please enter a valid email.', match: 'typeMismatch' }} description="The email to send notifications to." />
       </Cell>
 
       <Cell name="Dialog" id="dialog">
