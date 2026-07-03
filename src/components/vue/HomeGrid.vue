@@ -1,14 +1,9 @@
 <!--
-  Native VUE homepage grid — a 1:1 rebuild of the kumo-ui.com HomeGrid
-  (see /tmp/kumo-golden/HomeGrid.tsx) rendered with the compiled-native
-  @acoyfellow/kumo-vue components. Same sections and grid geometry as the golden
-  `/` React route, zero React shipped.
-
-  Interactive/compound Kumo components (Select, Combobox, Dialog, Popover,
-  DropdownMenu, Radio) consume the compiler's native `fixture` contract.
-  Structural compounds (Table, LayerCard) use the native sub-components,
-  aliased out of the composed component for the template. No raw-HTML
-  injection, no demo-CSS, no hand-rolled lookalikes.
+  Native VUE homepage grid matching the canonical kumo-ui.com HomeGrid
+  (see /tmp/kumo-golden/HomeGrid.tsx) with the currently exported
+  @acoyfellow/kumo-vue components. Interactive compound components consume
+  the compiler's native `fixture` contract; unavailable native components are
+  called out rather than recreated with local lookalikes.
 -->
 <script setup lang="ts">
 import {
@@ -27,10 +22,57 @@ const TableCell = Table.Cell;
 const LayerCardPrimary = LayerCard.Primary;
 const LayerCardSecondary = LayerCard.Secondary;
 
-const routeOf = (id: string) => `/components/${id}`;
+const componentRoutes: Record<string, string> = {
+  badge: '/components/badge',
+  banner: '/components/banner',
+  breadcrumbs: '/components/breadcrumbs',
+  button: '/components/button',
+  checkbox: '/components/checkbox',
+  'clipboard-text': '/components/clipboard-text',
+  code: '/components/code',
+  collapsible: '/components/collapsible',
+  combobox: '/components/combobox',
+  'command-palette': '/components/command-palette',
+  'date-range-picker': '/components/date-range-picker',
+  dialog: '/components/dialog',
+  dropdown: '/components/dropdown',
+  empty: '/components/empty',
+  grid: '/components/grid',
+  input: '/components/input',
+  'input-area': '/components/input',
+  label: '/components/label',
+  'layer-card': '/components/layer-card',
+  loader: '/components/loader',
+  menubar: '/components/menubar',
+  meter: '/components/meter',
+  pagination: '/components/pagination',
+  popover: '/components/popover',
+  radio: '/components/radio',
+  select: '/components/select',
+  'sensitive-input': '/components/sensitive-input',
+  'skeleton-line': '/components/skeleton-line',
+  surface: '/components/surface',
+  switch: '/components/switch',
+  table: '/components/table',
+  tabs: '/components/tabs',
+  text: '/components/text',
+  toast: '/components/toast',
+  tooltip: '/components/tooltip',
+};
+const routeOf = (id: string) => componentRoutes[id];
+const switchToggled = ref(true);
+const setSwitchToggled = (value: boolean) => { switchToggled.value = value; };
+const checked = ref(true);
+const setChecked = (value: boolean) => { checked.value = value; };
 const paginationPage = ref(1);
 const setPaginationPage = (page: number) => { paginationPage.value = page; };
 
+const selectLabels: Record<string, string> = {
+  all: 'All deployed versions',
+  active: 'Active versions',
+  specific: 'Specific versions',
+};
+const renderSelectValue = (value: unknown) => value ? selectLabels[String(value)] : 'Select a version...';
 const selectFixture = {
   export: 'root', props: {}, children: [
     { export: '.Option', props: { value: 'all' }, children: [{ text: 'All deployed versions' }] },
@@ -92,9 +134,10 @@ const tabs = [
   { value: 'contact', label: 'Contact' },
 ];
 const menuOptions = [
-  { icon: 'B', onClick: () => {}, tooltip: 'Bold' },
-  { icon: 'I', onClick: () => {}, tooltip: 'Italic' },
+  { id: 'bold', icon: 'B', onClick: () => {}, tooltip: 'Bold' },
+  { id: 'italic', icon: 'I', onClick: () => {}, tooltip: 'Italic' },
 ];
+const ignoreDateChange = () => {};
 </script>
 
 <template>
@@ -112,13 +155,13 @@ const menuOptions = [
       <a :href="routeOf('input')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Input</a>
       <div class="grid gap-3">
         <Input placeholder="Type something..." />
-        <Input default-value="Invalid!" />
+        <Input default-value="Invalid!" :aria-invalid="true" />
       </div>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('select')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Select</a>
-      <Select placeholder="Select a version..." :fixture="selectFixture" />
+      <Select class="w-[200px]" :render-value="renderSelectValue" :fixture="selectFixture" />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -128,12 +171,12 @@ const menuOptions = [
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('switch')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Switch</a>
-      <Switch :default-checked="true" />
+      <Switch :checked="switchToggled" :on-checked-change="setSwitchToggled" />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('input')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Input (with validation)</a>
-      <Input label="Email" placeholder="name@example.com" type="email" />
+      <Input label="Email" placeholder="name@example.com" type="email" :aria-invalid="true" />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -143,10 +186,7 @@ const menuOptions = [
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('tooltip')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Tooltip</a>
-      <div class="flex gap-2">
-        <Button>Add</Button>
-        <Button>Translate</Button>
-      </div>
+      <span class="text-xs text-kumo-inactive italic">native export unavailable</span>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -156,15 +196,12 @@ const menuOptions = [
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('collapsible')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Collapsible</a>
-      <div class="flex w-[200px] flex-col gap-1">
-        <span class="text-base font-medium text-kumo-default">What is Kumo?</span>
-        <span class="text-sm text-kumo-subtle">Kumo is Cloudflare's component library.</span>
-      </div>
+      <span class="text-xs text-kumo-inactive italic">native export unavailable</span>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('checkbox')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Checkbox</a>
-      <Checkbox label="Max bandwidth" :default-checked="true" />
+      <Checkbox label="Max bandwidth" :checked="checked" :on-checked-change="setChecked" />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -182,7 +219,7 @@ const menuOptions = [
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('skeleton-line')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">SkeletonLine</a>
-      <span class="text-xs text-kumo-inactive italic">no native emitter yet</span>
+      <span class="text-xs text-kumo-inactive italic">native export unavailable</span>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -198,9 +235,9 @@ const menuOptions = [
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('banner')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Banner</a>
       <div class="flex flex-col gap-2">
-        <Banner variant="default">This is a default banner.</Banner>
-        <Banner variant="alert">This is an alert banner.</Banner>
-        <Banner variant="error">This is an error banner.</Banner>
+        <Banner title="This is a default banner." />
+        <Banner title="This is an alert banner." variant="alert" />
+        <Banner title="This is an error banner." variant="error" />
       </div>
     </li>
 
@@ -247,7 +284,7 @@ const menuOptions = [
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('date-range-picker')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">DateRangePicker</a>
-      <div class="scale-90"><DateRangePicker /></div>
+      <div class="scale-90"><DateRangePicker :on-start-date-change="ignoreDateChange" :on-end-date-change="ignoreDateChange" /></div>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
