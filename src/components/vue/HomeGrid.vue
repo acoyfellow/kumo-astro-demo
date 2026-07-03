@@ -185,7 +185,7 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('input')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Input (with validation)</a>
-      <Input label="Email" placeholder="name@example.com" type="email" :aria-invalid="true" />
+      <Input label="Email" placeholder="name@example.com" type="email" variant="error" :error="{ message: 'Please enter a valid email.', match: 'typeMismatch' }" description="The email to send notifications to." />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
