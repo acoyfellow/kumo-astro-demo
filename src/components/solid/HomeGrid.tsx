@@ -183,7 +183,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Collapsible" id="collapsible">
-        <Collapsible title="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
+        <Collapsible label="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
       </Cell>
 
       <Cell name="Checkbox" id="checkbox">

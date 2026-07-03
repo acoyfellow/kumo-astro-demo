@@ -219,7 +219,7 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('collapsible')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Collapsible</a>
-      <Collapsible title="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
+      <Collapsible label="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">

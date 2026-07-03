@@ -197,7 +197,7 @@
   {@render box('Dropdown', 'dropdown', b_dropdown)}
 
   {#snippet b_collapsible()}
-    <Collapsible title="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
+    <Collapsible label="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
   {/snippet}
   {@render box('Collapsible', 'collapsible', b_collapsible)}
 
