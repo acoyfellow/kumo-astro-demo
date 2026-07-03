@@ -10,6 +10,9 @@
 @import "@cloudflare/kumo/styles/tailwind";
 
 @source "../../node_modules/@cloudflare/kumo/dist";
+@source "../../node_modules/@acoyfellow/kumo-svelte/package";
+@source "../../node_modules/@acoyfellow/kumo-vue/package";
+@source "../../node_modules/@acoyfellow/kumo-solid/package";
 @source "../components";
 @source "../pages";
 @source "../layouts";

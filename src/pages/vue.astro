@@ -1,93 +1,20 @@
 ---
-// Vue page — Kumo's compiled-native Vue package (@acoyfellow/kumo-vue).
-// Fills the exact same <Showcase> slots as every other page; only the import
-// source and the version badge differ.
-import {
-  Button, Badge, Text, Label, Field, Input, InputArea,
-  Checkbox, Switch, Tabs, Meter, Empty, Link, Loader, CloudflareLogo, Code,
-} from '@acoyfellow/kumo-vue';
-import '@acoyfellow/kumo-vue/tokens.css';
-import '@acoyfellow/kumo-vue/styles.css';
-import Docs from '../layouts/Docs.astro';
-import Showcase from '../components/Showcase.astro';
-import { installedVersion } from '../lib/kumoVersion';
-
-const kumoVersion = installedVersion('@acoyfellow/kumo-vue');
-const tabs = [
-  { label: 'Overview', value: 'overview' },
-  { label: 'Usage', value: 'usage' },
-  { label: 'API', value: 'api' },
-];
+// `/vue` — the kumo-ui.com homepage, rebuilt 1:1 with the compiled-native
+// @acoyfellow/kumo-vue components. Same shell (MainLayout + Header) and same
+// grid as the golden `/` React route; every Kumo component in the grid is
+// native Vue, hydrated as a single island.
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import HomeGrid from '../components/vue/HomeGrid.vue';
 ---
 
-<Docs title="Kumo components in Astro" active="vue" kumoPkg="@acoyfellow/kumo-vue" kumoVersion={kumoVersion}>
-  <Showcase
-    title="Kumo components in Astro"
-    subtitle="Real Kumo components, rendered by Astro — React here, native Svelte, Vue and Solid alongside."
-  >
-    <Fragment slot="buttons">
-      <Button client:load variant="primary">Get started</Button>
-      <Button client:load variant="secondary">Docs</Button>
-      <Button client:load variant="destructive">Delete</Button>
-      <Button client:load variant="outline">Outline</Button>
-      <Button client:load variant="ghost">Ghost</Button>
-    </Fragment>
-
-    <Fragment slot="badges">
-      <Badge client:load variant="success">Stable</Badge>
-      <Badge client:load variant="warning">Beta</Badge>
-      <Badge client:load variant="error">Deprecated</Badge>
-      <Badge client:load variant="info">New</Badge>
-      <Badge client:load variant="purple">Experimental</Badge>
-    </Fragment>
-
-    <Fragment slot="text">
-      <Text client:load variant="heading1" as="h1">Title</Text>
-      <Text client:load variant="mono">code</Text>
-      <Text client:load>Body</Text>
-    </Fragment>
-
-    <Fragment slot="label">
-      <Label client:load>Work email</Label>
-      <Label client:load showOptional>Middle Name</Label>
-    </Fragment>
-
-    <Fragment slot="inputs">
-      <Field client:load id="email" label="Work email" />
-      <Input client:load placeholder="Search the docs…" />
-    </Fragment>
-
-    <InputArea client:load slot="inputarea" placeholder="Write a comment…" />
-
-    <Fragment slot="checkbox">
-      <Checkbox client:load label="Accept terms and conditions" defaultChecked />
-      <Checkbox client:load label="Enable notifications" />
-    </Fragment>
-
-    <Fragment slot="switch">
-      <Switch client:load label="Enable notifications" defaultChecked />
-      <Switch client:load label="Reduced motion" />
-    </Fragment>
-
-    <Tabs client:load slot="tabs" tabs={tabs} selectedValue="overview" />
-
-    <Fragment slot="meter">
-      <Meter client:load label="Storage used" value={65} />
-      <Meter client:load label="API requests" value={40} />
-    </Fragment>
-
-    <Empty client:load slot="empty" title="No results" />
-
-    <Fragment slot="links">
-      <Link client:load href="#">Read the docs</Link>
-      <Link client:load href="#">View source</Link>
-      <Link client:load href="#">Changelog</Link>
-    </Fragment>
-
-    <Loader client:load slot="loaders" />
-
-    <CloudflareLogo client:load slot="logo" />
-
-    <Code client:load slot="code" code="npm i @acoyfellow/kumo-vue" lang="bash" />
-  </Showcase>
-</Docs>
+<MainLayout title="Kumo — native Vue" description="Kumo homepage, rendered with native Vue components">
+  <div class="flex min-h-screen flex-col">
+    <Header framework="vue" />
+    <main class="flex grow flex-col pr-12">
+      <div class="mx-auto w-full grow border-r border-kumo-line">
+        <HomeGrid client:only="vue" />
+      </div>
+    </main>
+  </div>
+</MainLayout>

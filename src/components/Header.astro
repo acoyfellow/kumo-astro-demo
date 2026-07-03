@@ -1,10 +1,17 @@
 ---
-// Static header with the real installed @cloudflare/kumo version — mirrors the
-// golden Header.astro (which reads a __KUMO_VERSION__ build define). Here the
-// version is read from node_modules at build time so it can never drift.
+// Homepage header — a slim top bar with a package/version badge. On the golden
+// `/` route it shows the canonical @cloudflare/kumo version; on the native
+// routes it shows the matching compiled-native package (kumo-svelte/vue/solid),
+// read from node_modules at build time so the version can never drift.
 import { installedVersion } from '../lib/kumoVersion';
 
-const kumoVersion = installedVersion('@cloudflare/kumo');
+interface Props {
+  framework?: 'react' | 'svelte' | 'vue' | 'solid';
+}
+const { framework = 'react' } = Astro.props;
+
+const pkg = framework === 'react' ? '@cloudflare/kumo' : `@acoyfellow/kumo-${framework}`;
+const kumoVersion = installedVersion(pkg);
 ---
 
 <header
@@ -14,7 +21,7 @@ const kumoVersion = installedVersion('@cloudflare/kumo');
     class="mx-auto flex h-12 items-center border-r border-kumo-line px-4"
   >
     <p class="ml-auto font-mono text-base text-kumo-subtle">
-      @cloudflare/kumo
+      {pkg}
       <span class="ml-1 rounded bg-kumo-control px-1.5 py-0.5 text-xs text-kumo-strong">
         v{kumoVersion}
       </span>
