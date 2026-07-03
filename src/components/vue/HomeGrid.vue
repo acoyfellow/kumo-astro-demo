@@ -108,7 +108,7 @@ const dialogFixture = {
 };
 const dropdownFixture = {
   children: [
-    { export: '.Trigger', children: [{ text: 'Add' }] },
+    { export: '.Trigger', props: { icon: 'PlusIcon' }, children: [{ text: 'Add' }] },
     { export: '.Content', children: [
       { export: '.Item', children: [{ text: 'Worker' }] },
       { export: '.Item', children: [{ text: 'Pages' }] },
@@ -211,7 +211,7 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('dropdown')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Dropdown</a>
-      <DropdownMenu :fixture="dropdownFixture" />
+      <DropdownMenu open :modal="false" :fixture="dropdownFixture" />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">

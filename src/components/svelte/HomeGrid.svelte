@@ -98,7 +98,7 @@
 
   const dropdownFixture = {
     children: [
-      { export: '.Trigger', children: [{ text: 'Add' }] },
+      { export: '.Trigger', props: { icon: 'PlusIcon' }, children: [{ text: 'Add' }] },
       { export: '.Content', children: [
         { export: '.Item', children: [{ text: 'Worker' }] },
         { export: '.Item', children: [{ text: 'Pages' }] },

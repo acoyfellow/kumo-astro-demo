@@ -82,7 +82,7 @@ const dialogFixture = {
 };
 const dropdownFixture = {
   children: [
-    { export: '.Trigger', children: [{ text: 'Add' }] },
+    { export: '.Trigger', props: { icon: 'PlusIcon' }, children: [{ text: 'Add' }] },
     { export: '.Content', children: [
       { export: '.Item', children: [{ text: 'Worker' }] },
       { export: '.Item', children: [{ text: 'Pages' }] },
@@ -179,7 +179,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Dropdown" id="dropdown">
-        <DropdownMenu open fixture={dropdownFixture} />
+        <DropdownMenu open modal={false} fixture={dropdownFixture} />
       </Cell>
 
       <Cell name="Collapsible" id="collapsible">
