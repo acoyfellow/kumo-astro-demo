@@ -13,9 +13,9 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "@acoyfellow/kumo-solid": "^0.0.4",
-    "@acoyfellow/kumo-svelte": "^0.0.4",
-    "@acoyfellow/kumo-vue": "^0.0.4",
+    "@acoyfellow/kumo-solid": "file:/Users/jcoeyman/cloudflare/kumo-compiler/dx/packages/kumo-solid",
+    "@acoyfellow/kumo-svelte": "file:/Users/jcoeyman/cloudflare/kumo-compiler/dx/packages/kumo-svelte",
+    "@acoyfellow/kumo-vue": "file:/Users/jcoeyman/cloudflare/kumo-compiler/dx/packages/kumo-vue",
     "@cloudflare/kumo": "^2.6.0",
     "@phosphor-icons/react": "^2.1.10",
     "react": "^19.0.0",
