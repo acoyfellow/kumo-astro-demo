@@ -127,12 +127,6 @@
   let switchToggled = $state(true);
   let checked = $state(true);
 
-  // The native package does not yet ship framework-native Phosphor icon
-  // bindings. Keep the canonical menu actions without substituting text glyphs.
-  const menuOptions = [
-    { icon: undefined, onClick: () => {}, tooltip: 'Bold' },
-    { icon: undefined, onClick: () => {}, tooltip: 'Italic' },
-  ];
 </script>
 
 {#snippet cell(name: string, id: string)}
@@ -275,7 +269,9 @@
   {#snippet b_meter()}<div class="w-full px-4"><Meter value={75} label="My meter" customValue="100 / 5,000" /></div>{/snippet}
   {@render box('Meter', 'meter', b_meter)}
 
-  {#snippet b_menubar()}<MenuBar isActive={0} options={menuOptions} />{/snippet}
+  {#snippet textBolderIcon()}<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M178.48,115.7A44,44,0,0,0,148,40H80a8,8,0,0,0-8,8V200a8,8,0,0,0,8,8h80a48,48,0,0,0,18.48-92.3ZM88,56h60a28,28,0,0,1,0,56H88Zm72,136H88V128h72a32,32,0,0,1,0,64Z"></path></svg>{/snippet}
+  {#snippet textItalicIcon()}<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M200,56a8,8,0,0,1-8,8H157.77L115.1,192H144a8,8,0,0,1,0,16H64a8,8,0,0,1,0-16H98.23L140.9,64H112a8,8,0,0,1,0-16h80A8,8,0,0,1,200,56Z"></path></svg>{/snippet}
+  {#snippet b_menubar()}<MenuBar isActive={0} options={[{ icon: textBolderIcon, onClick: () => {}, tooltip: 'Bold' }, { icon: textItalicIcon, onClick: () => {}, tooltip: 'Italic' }]} />{/snippet}
   {@render box('MenuBar', 'menubar', b_menubar)}
 
   {#snippet b_daterange()}
