@@ -11,6 +11,7 @@ import {
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
   SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty,
+  Tooltip, Collapsible, SkeletonLine,
 } from '@acoyfellow/kumo-vue';
 import { ref } from 'vue';
 
@@ -186,7 +187,10 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('tooltip')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Tooltip</a>
-      <span class="text-xs text-kumo-inactive italic">native export unavailable</span>
+      <div class="flex gap-2">
+        <Tooltip content="Add" open><Button shape="square">Add</Button></Tooltip>
+        <Tooltip content="Change language"><Button shape="square">Translate</Button></Tooltip>
+      </div>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -196,7 +200,7 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('collapsible')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Collapsible</a>
-      <span class="text-xs text-kumo-inactive italic">native export unavailable</span>
+      <Collapsible title="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
@@ -219,7 +223,11 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('skeleton-line')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">SkeletonLine</a>
-      <span class="text-xs text-kumo-inactive italic">native export unavailable</span>
+      <div class="flex w-[200px] flex-col gap-2">
+        <SkeletonLine :min-width="50" :max-width="100" />
+        <SkeletonLine :min-width="80" :max-width="100" />
+        <SkeletonLine :min-width="30" :max-width="100" />
+      </div>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">

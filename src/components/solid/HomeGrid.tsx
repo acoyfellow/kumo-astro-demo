@@ -8,6 +8,7 @@ import {
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
   SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty,
+  Tooltip, Collapsible, SkeletonLine,
 } from '@acoyfellow/kumo-solid';
 import { createSignal, type JSX } from 'solid-js';
 
@@ -170,7 +171,10 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Tooltip" id="tooltip">
-        <Unavailable />
+        <div class="flex gap-2">
+          <Tooltip content="Add" open><Button shape="square">Add</Button></Tooltip>
+          <Tooltip content="Change language"><Button shape="square">Translate</Button></Tooltip>
+        </div>
       </Cell>
 
       <Cell name="Dropdown" id="dropdown">
@@ -178,7 +182,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Collapsible" id="collapsible">
-        <Unavailable />
+        <Collapsible title="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
       </Cell>
 
       <Cell name="Checkbox" id="checkbox">
@@ -197,7 +201,11 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="SkeletonLine" id="skeleton-line">
-        <Unavailable />
+        <div class="flex w-[200px] flex-col gap-2">
+          <SkeletonLine minWidth={50} maxWidth={100} />
+          <SkeletonLine minWidth={80} maxWidth={100} />
+          <SkeletonLine minWidth={30} maxWidth={100} />
+        </div>
       </Cell>
 
       <Cell name="Surface" id="surface">

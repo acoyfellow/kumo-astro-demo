@@ -18,7 +18,7 @@
     Label, LayerCard, LayerCardPrimary, LayerCardSecondary, Loader, MenuBar,
     Meter, Pagination, Popover, Radio, Select, SensitiveInput, Surface, Switch,
     Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, Text,
-    Toasty, createKumoToastManager,
+    Toasty, createKumoToastManager, Tooltip, Collapsible, SkeletonLine,
   } from '@acoyfellow/kumo-svelte';
 
   const toastManager = createKumoToastManager();
@@ -190,8 +190,8 @@
 
   {#snippet b_tooltip()}
     <div class="flex gap-2">
-      <Button>Add</Button>
-      <Button>Translate</Button>
+      <Tooltip content="Add" open><Button shape="square">Add</Button></Tooltip>
+      <Tooltip content="Change language"><Button shape="square">Translate</Button></Tooltip>
     </div>
   {/snippet}
   {@render box('Tooltip', 'tooltip', b_tooltip)}
@@ -200,10 +200,7 @@
   {@render box('Dropdown', 'dropdown', b_dropdown)}
 
   {#snippet b_collapsible()}
-    <div class="flex w-[200px] flex-col gap-1">
-      <span class="text-base font-medium text-kumo-default">What is Kumo?</span>
-      <span class="text-sm text-kumo-subtle">Kumo is Cloudflare's component library.</span>
-    </div>
+    <Collapsible title="What is Kumo?">Kumo is Cloudflare's component library.</Collapsible>
   {/snippet}
   {@render box('Collapsible', 'collapsible', b_collapsible)}
 
@@ -221,7 +218,13 @@
   {#snippet b_loader()}<Loader />{/snippet}
   {@render box('Loader', 'loader', b_loader)}
 
-  {#snippet b_skeleton()}<span class="text-xs text-kumo-inactive italic">no native emitter yet</span>{/snippet}
+  {#snippet b_skeleton()}
+    <div class="flex w-[200px] flex-col gap-2">
+      <SkeletonLine minWidth={50} maxWidth={100} />
+      <SkeletonLine minWidth={80} maxWidth={100} />
+      <SkeletonLine minWidth={30} maxWidth={100} />
+    </div>
+  {/snippet}
   {@render box('SkeletonLine', 'skeleton-line', b_skeleton)}
 
   {#snippet b_surface()}
