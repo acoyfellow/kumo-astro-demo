@@ -18,8 +18,10 @@
     Label, LayerCard, LayerCardPrimary, LayerCardSecondary, Loader, MenuBar,
     Meter, Pagination, Popover, Radio, Select, SensitiveInput, Surface, Switch,
     Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, Text,
-    Toasty,
+    Toasty, createKumoToastManager,
   } from '@acoyfellow/kumo-svelte';
+
+  const toastManager = createKumoToastManager();
 
   const componentRoutes: Record<string, string> = {
     badge: '/components/badge',
@@ -253,7 +255,7 @@
   {/snippet}
   {@render box('Badge', 'badge', b_badge)}
 
-  {#snippet b_toast()}<Toasty><Button>Give me a toast</Button></Toasty>{/snippet}
+  {#snippet b_toast()}<Toasty {toastManager}><Button onclick={() => toastManager.add({ title: 'Toast created', description: 'This is a toast notification.' })}>Give me a toast</Button></Toasty>{/snippet}
   {@render box('Toast', 'toast', b_toast)}
 
   {#snippet b_pagination()}<Pagination page={1} perPage={10} totalCount={100} />{/snippet}
