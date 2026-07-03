@@ -10,10 +10,12 @@ import {
   Badge, Banner, Button, Checkbox, ClipboardText, Code, Combobox,
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
-  SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty,
+  SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty, createKumoToastManager,
   Tooltip, Collapsible, SkeletonLine,
 } from '@acoyfellow/kumo-vue';
 import { ref } from 'vue';
+
+const toastManager = createKumoToastManager();
 
 const TableHeader = Table.Header;
 const TableBody = Table.Body;
@@ -267,7 +269,7 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('toast')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Toast</a>
-      <Toasty><Button>Give me a toast</Button></Toasty>
+      <Toasty :toast-manager="toastManager"><Button @click="toastManager.add({ title: 'Toast created', description: 'This is a toast notification.' })">Give me a toast</Button></Toasty>
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">

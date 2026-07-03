@@ -7,7 +7,7 @@ import {
   Badge, Banner, Button, Checkbox, ClipboardText, Code, Combobox,
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
-  SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty,
+  SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty, createKumoToastManager,
   Tooltip, Collapsible, SkeletonLine,
 } from '@acoyfellow/kumo-solid';
 import { createSignal, type JSX } from 'solid-js';
@@ -132,6 +132,7 @@ export function HomeGrid(): JSX.Element {
   const [switchToggled, setSwitchToggled] = createSignal(true);
   const [checked, setChecked] = createSignal(true);
   const [paginationPage, setPaginationPage] = createSignal(1);
+  const toastManager = createKumoToastManager();
 
   return (
     <ul class="grid auto-rows-min grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
@@ -239,7 +240,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Toast" id="toast">
-        <Toasty><Button>Give me a toast</Button></Toasty>
+        <Toasty toastManager={toastManager}><Button onClick={() => toastManager.add({ title: 'Toast created', description: 'This is a toast notification.' })}>Give me a toast</Button></Toasty>
       </Cell>
 
       <Cell name="Pagination" id="pagination">
