@@ -7,7 +7,7 @@
 -->
 <script setup lang="ts">
 import {
-  Badge, Banner, Button, Checkbox, ClipboardText, Code, Combobox,
+  Badge, Banner, Button, Checkbox, ClipboardText, CodeBlock, Combobox,
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
   SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty, createKumoToastManager,
@@ -253,7 +253,7 @@ const ignoreDateChange = () => {};
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">
       <a :href="routeOf('code')" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Code</a>
-      <Code lang="ts" code='const a = callMyFunction("hello")' />
+      <CodeBlock lang="ts" code='const a = callMyFunction("hello")' />
     </li>
 
     <li class="relative flex aspect-square items-center justify-center bg-kumo-elevated ring-1 ring-kumo-line">

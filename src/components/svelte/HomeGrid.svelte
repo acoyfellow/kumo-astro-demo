@@ -13,7 +13,7 @@
 -->
 <script lang="ts">
   import {
-    Badge, Banner, Button, Checkbox, ClipboardText, Code, Combobox,
+    Badge, Banner, Button, Checkbox, ClipboardText, CodeBlock, Combobox,
     DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
     Label, LayerCard, LayerCardPrimary, LayerCardSecondary, Loader, MenuBar,
     Meter, Pagination, Popover, Radio, Select, SensitiveInput, Surface, Switch,
@@ -235,7 +235,7 @@
   {/snippet}
   {@render box('Surface', 'surface', b_surface)}
 
-  {#snippet b_code()}<Code lang="ts" code={`const a = callMyFunction("hello")`} />{/snippet}
+  {#snippet b_code()}<CodeBlock lang="ts" code={`const a = callMyFunction("hello")`} />{/snippet}
   {@render box('Code', 'code', b_code)}
 
   {#snippet b_banner()}

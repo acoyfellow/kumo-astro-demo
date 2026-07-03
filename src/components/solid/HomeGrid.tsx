@@ -4,7 +4,7 @@
 // the compiler's native `fixture` contract; unavailable native components are
 // called out rather than recreated with local lookalikes.
 import {
-  Badge, Banner, Button, Checkbox, ClipboardText, Code, Combobox,
+  Badge, Banner, Button, Checkbox, ClipboardText, CodeBlock, Combobox,
   DateRangePicker, Dialog, DropdownMenu, Grid, GridItem, Input, InputArea,
   Label, LayerCard, Loader, MenuBar, Meter, Pagination, Popover, Radio, Select,
   SensitiveInput, Surface, Switch, Table, Tabs, Text, Toasty, createKumoToastManager,
@@ -214,7 +214,7 @@ export function HomeGrid(): JSX.Element {
       </Cell>
 
       <Cell name="Code" id="code">
-        <Code lang="ts" code={'const a = callMyFunction("hello")'} />
+        <CodeBlock lang="ts" code={'const a = callMyFunction("hello")'} />
       </Cell>
 
       <Cell name="Banner" id="banner">
