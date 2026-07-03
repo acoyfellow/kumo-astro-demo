@@ -21,7 +21,45 @@
     Toasty,
   } from '@acoyfellow/kumo-svelte';
 
-  const route = (id: string) => `/components/${id}`;
+  const componentRoutes: Record<string, string> = {
+    badge: '/components/badge',
+    banner: '/components/banner',
+    breadcrumbs: '/components/breadcrumbs',
+    button: '/components/button',
+    checkbox: '/components/checkbox',
+    'clipboard-text': '/components/clipboard-text',
+    code: '/components/code',
+    collapsible: '/components/collapsible',
+    combobox: '/components/combobox',
+    'command-palette': '/components/command-palette',
+    'date-range-picker': '/components/date-range-picker',
+    dialog: '/components/dialog',
+    dropdown: '/components/dropdown',
+    empty: '/components/empty',
+    grid: '/components/grid',
+    input: '/components/input',
+    'input-area': '/components/input',
+    label: '/components/label',
+    'layer-card': '/components/layer-card',
+    loader: '/components/loader',
+    menubar: '/components/menubar',
+    meter: '/components/meter',
+    pagination: '/components/pagination',
+    popover: '/components/popover',
+    radio: '/components/radio',
+    select: '/components/select',
+    'sensitive-input': '/components/sensitive-input',
+    'skeleton-line': '/components/skeleton-line',
+    surface: '/components/surface',
+    switch: '/components/switch',
+    table: '/components/table',
+    tabs: '/components/tabs',
+    text: '/components/text',
+    toast: '/components/toast',
+    tooltip: '/components/tooltip',
+  };
+
+  const route = (id: string) => componentRoutes[id];
 
   const selectFixture = {
     export: 'root', props: {}, children: [
@@ -84,9 +122,14 @@
     ],
   };
 
+  let switchToggled = $state(true);
+  let checked = $state(true);
+
+  // The native package does not yet ship framework-native Phosphor icon
+  // bindings. Keep the canonical menu actions without substituting text glyphs.
   const menuOptions = [
-    { icon: 'B', onClick: () => {}, tooltip: 'Bold' },
-    { icon: 'I', onClick: () => {}, tooltip: 'Italic' },
+    { icon: undefined, onClick: () => {}, tooltip: 'Bold' },
+    { icon: undefined, onClick: () => {}, tooltip: 'Italic' },
   ];
 </script>
 
@@ -114,21 +157,30 @@
   {#snippet b_input()}
     <div class="grid gap-3">
       <Input placeholder="Type something..." />
-      <Input defaultValue="Invalid!" />
+      <Input variant="error" defaultValue="Invalid!" />
     </div>
   {/snippet}
   {@render box('Input', 'input', b_input)}
 
-  {#snippet b_select()}<Select placeholder="Select a version..." fixture={selectFixture} />{/snippet}
+  {#snippet b_select()}<Select className="w-[200px]" placeholder="Select a version..." fixture={selectFixture} />{/snippet}
   {@render box('Select', 'select', b_select)}
 
   {#snippet b_combobox()}<Combobox fixture={comboboxFixture} />{/snippet}
   {@render box('Combobox', 'combobox', b_combobox)}
 
-  {#snippet b_switch()}<Switch defaultChecked />{/snippet}
+  {#snippet b_switch()}<Switch checked={switchToggled} onCheckedChange={(value) => switchToggled = Boolean(value)} />{/snippet}
   {@render box('Switch', 'switch', b_switch)}
 
-  {#snippet b_input2()}<Input label="Email" placeholder="name@example.com" type="email" />{/snippet}
+  {#snippet b_input2()}
+    <Input
+      label="Email"
+      placeholder="name@example.com"
+      type="email"
+      variant="error"
+      error={{ message: 'Please enter a valid email.', match: 'typeMismatch' }}
+      description="The email to send notifications to."
+    />
+  {/snippet}
   {@render box('Input (with validation)', 'input', b_input2)}
 
   {#snippet b_dialog()}<Dialog fixture={dialogFixture} />{/snippet}
@@ -142,7 +194,7 @@
   {/snippet}
   {@render box('Tooltip', 'tooltip', b_tooltip)}
 
-  {#snippet b_dropdown()}<DropdownMenu fixture={dropdownFixture} />{/snippet}
+  {#snippet b_dropdown()}<DropdownMenu open modal={false} fixture={dropdownFixture} />{/snippet}
   {@render box('Dropdown', 'dropdown', b_dropdown)}
 
   {#snippet b_collapsible()}
@@ -153,7 +205,7 @@
   {/snippet}
   {@render box('Collapsible', 'collapsible', b_collapsible)}
 
-  {#snippet b_checkbox()}<Checkbox label="Max bandwidth" defaultChecked />{/snippet}
+  {#snippet b_checkbox()}<Checkbox label="Max bandwidth" checked={checked} onCheckedChange={(value) => checked = Boolean(value)} />{/snippet}
   {@render box('Checkbox', 'checkbox', b_checkbox)}
 
   {#snippet b_layercard()}
@@ -180,9 +232,9 @@
 
   {#snippet b_banner()}
     <div class="flex flex-col gap-2">
-      <Banner variant="default">This is a default banner.</Banner>
-      <Banner variant="alert">This is an alert banner.</Banner>
-      <Banner variant="error">This is an error banner.</Banner>
+      <Banner text="This is a default banner." />
+      <Banner text="This is an alert banner." variant="alert" />
+      <Banner text="This is an error banner." variant="error" />
     </div>
   {/snippet}
   {@render box('Banner', 'banner', b_banner)}
@@ -216,7 +268,11 @@
   {#snippet b_menubar()}<MenuBar isActive={0} options={menuOptions} />{/snippet}
   {@render box('MenuBar', 'menubar', b_menubar)}
 
-  {#snippet b_daterange()}<div class="scale-90"><DateRangePicker /></div>{/snippet}
+  {#snippet b_daterange()}
+    <div class="scale-90">
+      <DateRangePicker onStartDateChange={() => {}} onEndDateChange={() => {}} />
+    </div>
+  {/snippet}
   {@render box('DateRangePicker', 'date-range-picker', b_daterange)}
 
   {#snippet b_breadcrumbs()}
@@ -269,7 +325,7 @@
   {#snippet b_radio()}<Radio fixture={radioFixture} />{/snippet}
   {@render box('Radio', 'radio', b_radio)}
 
-  {#snippet b_sensitive()}<SensitiveInput defaultValue="super-secret-api-key" />{/snippet}
+  {#snippet b_sensitive()}<SensitiveInput defaultValue="super-secret-api-key" readOnly />{/snippet}
   {@render box('SensitiveInput', 'sensitive-input', b_sensitive)}
 
   {#snippet b_table()}
@@ -293,7 +349,7 @@
     <div class="flex flex-col gap-1">
       <Text size="lg" bold>Large Bold Text</Text>
       <Text size="base">Regular text content</Text>
-      <Text size="sm">Small subtle text</Text>
+      <Text size="sm" color="subtle">Small subtle text</Text>
     </div>
   {/snippet}
   {@render box('Text', 'text', b_text)}
