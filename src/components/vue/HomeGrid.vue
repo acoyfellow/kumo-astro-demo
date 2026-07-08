@@ -15,8 +15,8 @@ import {
 } from '@acoyfellow/kumo-vue';
 import { ref, h } from 'vue';
 
-const TextBolderIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '1em', height: '1em', fill: 'currentColor', viewBox: '0 0 256 256' }, [h('path', { d: 'M178.48,115.7A44,44,0,0,0,148,40H80a8,8,0,0,0-8,8V200a8,8,0,0,0,8,8h80a48,48,0,0,0,18.48-92.3ZM88,56h60a28,28,0,0,1,0,56H88Zm72,136H88V128h72a32,32,0,0,1,0,64Z' })]);
-const TextItalicIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '1em', height: '1em', fill: 'currentColor', viewBox: '0 0 256 256' }, [h('path', { d: 'M200,56a8,8,0,0,1-8,8H157.77L115.1,192H144a8,8,0,0,1,0,16H64a8,8,0,0,1,0-16H98.23L140.9,64H112a8,8,0,0,1,0-16h80A8,8,0,0,1,200,56Z' })]);
+const TextBolderIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '18', height: '18', fill: 'currentColor', viewBox: '0 0 256 256' }, [h('path', { d: 'M178.48,115.7A44,44,0,0,0,148,40H80a8,8,0,0,0-8,8V200a8,8,0,0,0,8,8h80a48,48,0,0,0,18.48-92.3ZM88,56h60a28,28,0,0,1,0,56H88Zm72,136H88V128h72a32,32,0,0,1,0,64Z' })]);
+const TextItalicIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '18', height: '18', fill: 'currentColor', viewBox: '0 0 256 256' }, [h('path', { d: 'M200,56a8,8,0,0,1-8,8H157.77L115.1,192H144a8,8,0,0,1,0,16H64a8,8,0,0,1,0-16H98.23L140.9,64H112a8,8,0,0,1,0-16h80A8,8,0,0,1,200,56Z' })]);
 
 const toastManager = createKumoToastManager();
 
