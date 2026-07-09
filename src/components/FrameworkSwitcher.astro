@@ -1,0 +1,42 @@
+---
+// Cross-route navigation for the four homepage implementations. Lives in the
+// 48px golden sidebar rail so it is present identically on every route; the
+// only per-route difference is which link is marked aria-current="page" (the
+// page you are actually on), exactly like any multi-page site's nav. Pure
+// Astro-rendered chrome (no framework island), so the four routes still ship
+// the same navigation HTML.
+interface Props {
+  framework?: 'react' | 'svelte' | 'vue' | 'solid';
+}
+const { framework = 'react' } = Astro.props;
+
+const links = [
+  { id: 'react', label: 'React', short: 'R', href: '/' },
+  { id: 'svelte', label: 'Svelte', short: 'S', href: '/svelte' },
+  { id: 'vue', label: 'Vue', short: 'V', href: '/vue' },
+  { id: 'solid', label: 'Solid', short: 'So', href: '/solid' },
+];
+---
+
+<nav aria-label="Framework" class="flex w-full flex-col items-center gap-1 px-1.5 py-3">
+  {
+    links.map((link) => {
+      const active = link.id === framework;
+      return (
+        <a
+          href={link.href}
+          title={link.label}
+          aria-current={active ? 'page' : undefined}
+          class:list={[
+            'flex h-9 w-9 items-center justify-center rounded-md text-sm font-semibold transition-colors',
+            active
+              ? 'bg-kumo-control text-kumo-strong ring ring-kumo-line'
+              : 'text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default',
+          ]}
+        >
+          {link.short}
+        </a>
+      );
+    })
+  }
+</nav>

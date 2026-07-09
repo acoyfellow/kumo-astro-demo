@@ -5,12 +5,14 @@
 // route is self-contained. The kumo theme + Tailwind utilities come from
 // global.css (the same tokens the canonical docs site ships).
 import '../styles/global.css';
+import FrameworkSwitcher from '../components/FrameworkSwitcher.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  framework?: 'react' | 'svelte' | 'vue' | 'solid';
 }
-const { title = 'Kumo', description = 'Kumo – a modern component library' } = Astro.props;
+const { title = 'Kumo', description = 'Kumo – a modern component library', framework = 'react' } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,6 +31,7 @@ const { title = 'Kumo', description = 'Kumo – a modern component library' } = 
         class="fixed top-0 left-0 z-40 flex h-screen w-12 flex-col border-r border-kumo-line bg-kumo-elevated"
         data-sidebar-open="false"
       >
+        <FrameworkSwitcher framework={framework} />
       </aside>
 
       <!-- Main content area, offset by the rail. -->
